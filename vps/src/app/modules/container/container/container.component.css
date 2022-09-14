@@ -1,0 +1,30 @@
+.main-container {
+    height: 100vh;
+}
+
+.side-bar {
+    background-color: #f7f8ff;
+    /* border-right: 1px solid #dee2e6; */
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.content-bar {
+    padding-left: 0px;
+}
+
+.left {
+    background-color: green;
+    width: 100%;
+}
+
+.right {
+    background-color: blue;
+    width: 100%;
+}
+
+/* .content-box{
+    margin: 10px 10px;
+    
+} */
+

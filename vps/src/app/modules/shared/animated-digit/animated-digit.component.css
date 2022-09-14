@@ -1,0 +1,6 @@
+.animated-digit {
+    display: inline-flex;
+    font-size: 2vw;
+    font-weight: bold;
+    margin-top: 1.5vw;
+}

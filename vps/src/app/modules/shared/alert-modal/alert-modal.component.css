@@ -1,0 +1,10 @@
+.modal-backdrop {
+    background-color: transparent !important;
+ }
+.dis-block {
+    display: block;
+}
+
+.modal-top {
+    top: -10% !important;
+}

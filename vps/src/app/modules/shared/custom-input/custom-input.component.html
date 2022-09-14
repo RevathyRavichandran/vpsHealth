@@ -1,0 +1,32 @@
+<div class="form-group" [ngClass]="{'typ-optional': optional, focused: isNonEmpty}">
+
+    <!-- <label>{{labelName}}</label> -->
+    <input 
+        [type]="type" 
+        #customInput 
+        [name]="id" 
+        class="form-control input_brd_pad"
+        [ngClass]="inputClass" 
+        [id]="id" 
+        [(ngModel)]="inputValue" 
+        appFiledFill
+        appPreventAction 
+        (ngModelChange)="updateChanges()" 
+        [minLength]="minLength?.rule" 
+        [placeholder]="placeHolder"
+        [disabled]="isDisabledInp" 
+        autocomplete="off" 
+        aria-describedby="id"
+    >
+    <div class="error-feedback" *ngIf="inputError">
+        <div>
+            {{errorMsg}}
+        </div>
+    </div>
+    <div class="error-feedback" *ngIf="allowCharacterError">
+        <div>
+            {{allowChartErrorMsg}}
+        </div>
+    </div>
+
+</div>

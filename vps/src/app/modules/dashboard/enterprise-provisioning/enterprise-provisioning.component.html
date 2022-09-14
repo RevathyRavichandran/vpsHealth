@@ -1,0 +1,153 @@
+<form [formGroup]="enterpriseProvisionForm">
+    <div class="container">
+
+        <div class="row hgt-20">
+            <div class="col-8">
+                <p class="font-blk">
+                    <img src="assets/image/left-arrow.png" class="pointer" (click)="onCancel()"> {{labels?.enterprisesProvisioning}}
+                </p>
+            </div>
+            <div class="col-4 text-right">
+                <button class="btn btn-sec" (click)="onCancel()"> {{labels?.cancel}} </button>&nbsp;
+                <!-- <button class="btn save-btn btn-pri" (click)="showConfirmModal()"> {{labels?.save}} </button> -->
+            </div>
+        </div>
+        <hr class="hr-style">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-3">
+                        <label for="enterpriseName" class="col-12 col-form-label">{{labels?.enterpriseName}}</label>
+                        <app-custom-input [id]="'enterpriseName'" [placeHolder]="'Enterprise Name'" [maxLength]="validations?.validationData.companyName.maxLength" formControlName="enterpriseName" [isRequired]="validations?.validationData.isRequired" [isDirty]="isDirty" [type]="'text'">
+                        </app-custom-input>
+                    </div>
+                    <div class="col-7">
+                        <label class="col-12 col-form-label">{{labels?.planType}}</label>
+                        <div class=" plan-type grid-container">
+                            <label class="label-border">
+                                <!-- <input 
+                                    type="radio" 
+                                    checked 
+                                    class="mr-10" 
+                                    name="plan" 
+                                    value="1"
+                                    formControlName="plan" 
+                                    (click)="onPlanTypeSelected($event)"
+                                />&nbsp;Trial -->
+                            </label>
+                            <label class="label-border">
+                                <!-- <input 
+                                    type="radio" 
+                                    class="mr-10" 
+                                    name="plan" 
+                                    value="2"
+                                    formControlName="plan" 
+                                    (click)="onPlanTypeSelected($event)"
+                                />&nbsp;Basic -->
+                            </label>
+                            <label class="label-border">
+                                <!-- <input 
+                                    type="radio" 
+                                    class="mr-10" 
+                                    name="plan" 
+                                    value="3"
+                                    formControlName="plan" 
+                                    (click)="onPlanTypeSelected($event)"
+                                />&nbsp;Profession -->
+                            </label>
+                            <label class="label-border">
+                                <!-- <input 
+                                    type="radio" 
+                                    class="mr-10" 
+                                    name="plan" 
+                                    value="4"
+                                    formControlName="plan" 
+                                    (click)="onPlanTypeSelected($event)"
+                                />&nbsp;Enterprise -->
+                            </label>
+                            <label class="label-border-less">
+                                <!-- <input 
+                                    type="radio" 
+                                    class="mr-10" 
+                                    name="plan" 
+                                    value="5"
+                                    formControlName="plan" 
+                                    (click)="onPlanTypeSelected($event)"
+                                />&nbsp;Custom -->
+                            </label>
+                        </div>
+                        <div class="err-feedback" *ngIf="isPlanChecked">
+                            <div>
+                                Plan Type is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 p-0">
+                        <div class="col-12">
+                            <label for="businessOwnerEmail" class="col-12 col-form-label">{{labels?.businessOwnerEmail}}
+                            </label>
+                            <app-custom-input [id]="'businessOwnerEmail'" [placeHolder]="'Business Owner EmailID'" formControlName="businessOwnerEmail" [isRequired]="validations?.validationData.isRequired" [isDirty]="isDirty" [patternCheck]="validations?.validationData.email.patternCheck"
+                                [isDisabledInp]="true">
+                            </app-custom-input>
+                        </div>
+                        <div class="col-12">
+                            <label class="col-12 col-form-label">{{labels?.accountStatus}}</label>
+                            <app-custom-select formControlName="accountStatus" [values]="constant?.accountStatus" [isRequired]="validations?.validationData.isRequired" [isDirty]="isDirty">
+                            </app-custom-select>
+                        </div>
+                        <div class="col-12">
+                            <label class="col-12 col-form-label">{{labels?.payment}}</label>
+                            <app-custom-select formControlName="paymentType" [values]="constant?.paymentType" [isRequired]="validations?.validationData.isRequired" [isDirty]="isDirty">
+                            </app-custom-select>
+                        </div>
+                        <div class="col-12">
+                            <label class="col-12 col-form-label">{{labels?.billingType}}</label>
+                            <app-custom-select formControlName="billingType" [values]="constant?.billingType" [isRequired]="validations?.validationData.isRequired" [isDirty]="isDirty">
+                            </app-custom-select>
+                        </div>
+
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-5 side-block">
+                                <p class="big-num">{{enterpriseProvisionData?.journey}}
+                                </p>
+                                <!-- <p class="big-num">{{enterpriseProvisionData?.journey}} / {{enterpriseProvisionData?.availableJourney}}
+                                </p> -->
+                                <p class="box-font">Journey</p>
+                            </div>
+                            <div class="col-5 side-block">
+                                <p class="big-num">{{enterpriseProvisionData?.camapaign}}
+                                </p>
+                                <!-- <p class="big-num">{{enterpriseProvisionData?.camapaign}} / {{enterpriseProvisionData?.availableCamapaign}}
+                                </p> -->
+                                <p class="box-font">Campaign</p>
+                            </div>
+                            <div class="col-5 side-block">
+                                <p class="big-num">{{enterpriseProvisionData?.encap}}
+                                </p>
+                                <!-- <p class="big-num">{{enterpriseProvisionData?.encap}} / {{enterpriseProvisionData?.availableEncap}}
+                                </p> -->
+                                <p class="box-font">Encaps</p>
+                            </div>
+                            <div class="col-5 side-block">
+                                <p class="big-num">{{enterpriseProvisionData?.agent}}
+                                </p>
+                                <!-- <p class="big-num">{{enterpriseProvisionData?.agent}} / {{enterpriseProvisionData?.availableAgent}}
+                                </p> -->
+                                <p class="box-font">Agent</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- <app-confirm-modal [showConfirmModal]="showModal" [data]="inputDataModal" (submitModal)="onSave()" (closeModal)="closeModal()"></app-confirm-modal> -->

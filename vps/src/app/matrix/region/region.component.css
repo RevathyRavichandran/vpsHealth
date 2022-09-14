@@ -1,0 +1,273 @@
+.region-list {
+  margin: 0 10px;
+}
+
+table {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table {
+  background-color: #eee;
+}
+
+.none {
+  display: none;
+}
+
+table td {
+  color: black;
+}
+
+table tr:hover,
+td:hover {
+  background-color: #05182aa8;
+  color: #fff !important;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  /* color: white; */
+}
+
+span {
+  float: right;
+  font-weight: bold;
+}
+
+/* sidebar  */
+
+.main-container {
+  height: 100vh;
+}
+
+.side-bar {
+  background-color: #f7f8ff;
+  /* border-right: 1px solid #dee2e6; */
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.content-bar {
+  padding-left: 0px;
+}
+
+/* .content-box{
+    margin: 10px 10px;
+    
+} */
+
+/* header css  */
+
+.header {
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 10px;
+  box-shadow: -2px 1px 7px 5px #eee;
+}
+
+.header img {
+  width: 50px;
+}
+
+.table-height {
+  height: 72vh;
+  overflow: auto;
+}
+
+/* scroll bar css  */
+
+/* Let's get this party started */
+
+.table-height::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+
+.table-height::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+
+.table-height::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  /* background: #becbe0; */
+  background: #b9c0c8;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+/* scroll bar end  */
+
+h2 {
+  font-size: 1.5vw;
+  font-weight: bold;
+  margin-left: 1vw;
+}
+
+.header h3,
+.header h4 {
+  font-weight: bold;
+  font-size: 2.2vw;
+  text-align: right;
+}
+
+.regionHeader h2,
+.regionHeader h3,
+.regionHeader h4 {
+  color: #f05f21;
+  margin-bottom: 0.5vw;
+}
+
+.facilityHeader h2,
+.facilityHeader h3,
+.facilityHeader h4 {
+  color: #008009;
+  margin-bottom: 0.5vw;
+}
+
+.departmentHeader h2,
+.departmentHeader h3,
+.departmentHeader h4 {
+  color: #075cd7;
+  margin-bottom: 0.5vw;
+}
+
+.physicianHeader h2,
+.physicianHeader h3,
+.physicianHeader h4 {
+  color: #764dc0;
+  margin-bottom: 0.5vw;
+}
+
+.regionTable {
+  background-color: #fdf1eb;
+}
+
+.facilityTable {
+  background-color: #f3fff4;
+}
+
+.departmentTable {
+  background-color: #ecf3fd;
+}
+
+.physicianTable {
+  background-color: #f9f5ff;
+}
+
+.selectedItem {
+  background-color: #1b6bf0 !important;
+  color: #fff !important;
+}
+
+tr.mat-row {
+  height: 0;
+}
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media only screen and (min-width: 1200px) {
+  .header img {
+    width: 80px;
+  }
+  .table-height {
+    height: 73vh;
+  }
+}
+
+.font-blk {
+    font-size: 2rem;
+}
+
+/* Border */
+:host::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #C8C9CF !important;
+}
+/* Font color */
+:host::ng-deep.input.mat-input-element {
+  color: #C8C9CF !important;
+}
+
+:host::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #C8C9CF !important;
+}
+
+:host::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #C8C9CF !important;
+}
+
+:host::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #C8C9CF !important;
+}
+
+:host::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: black !important;
+}
+
+mat-datepicker-toggle {
+  color: #C8C9CF !important;
+}
+
+:host::ng-deep.mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {
+    color: white !important;
+    background: #48A950 !important;
+    padding: 0.5rem 2rem;
+}
+:host::ng-deep.mat-raised-button.mat-accent, .mat-raised-icon-button.mat-accent, .mat-raised-button.mat-accent {
+    padding: 0.5rem 2rem;
+}
+:host::ng-deep.mat-form-field-infix {
+    border-top: 0.44375em solid transparent;
+}
+.reset {
+    padding: 0.5rem 2rem;
+}
+.apply {
+    margin-right: 1rem;
+}
+:host::ng-deep.mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+.filter {
+  text-align: end;
+  padding-right: 2rem;
+}

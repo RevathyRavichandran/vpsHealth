@@ -1,0 +1,84 @@
+<div class="modal fade background-opacity" id="billingModal" tabindex="-1" *ngIf="showInfoModal" [ngClass]="{'dis-block':showInfoModal,'show': showInfoModal}" role="dialog" aria-labelledby="billingModalLabel" aria-hidden="true">
+    <div class="modal-dialog vertical-alignment-helper" role="document">
+        <div class="vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img class="arrow-size" src="assets/image/left-arrow.png"><span class="font-blk">&nbsp;{{infoDatas.title}}</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <hr class="hr-style">
+                <div class="modal-body row">
+                    <div 
+                        class="col-4 form-group" 
+                        [ngClass]="{'col-8': infoData?.label === 'Ticket Creator', 'visibile-hide': infoData?.label === ''}" 
+                        *ngFor="let infoData of infoDatas.formData"
+                    >
+                        <label>{{infoData ? infoData?.label:''}}</label>
+                        <input class="form-control input-sty" name="owner_name" type="text" [value]="infoData?.value" disabled>
+                    </div>                    
+                    <!-- <div class="col-4 form-group">
+                        <label>{{(infoData.formData[0])?(infoData.formData[0].label):''}}</label>
+                        <input class="form-control input-sty" name="owner_name" type="text" [value]="formInputs.inputData1" disabled>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label>{{(infoData.formData[1])?(infoData.formData[1].label):''}}</label>
+                        <input class="form-control input-sty" name="owner_number" type="text" [value]="formInputs.inputData2" disabled>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label>{{(infoData.formData[2])?(infoData.formData[2].label):''}}</label>
+                        <input class="form-control input-sty" name="api_used" type="text" [value]="formInputs.inputData3" disabled>
+                    </div>
+
+                    <div class="col-8" *ngIf="infoData.modalType != 'invoice'">
+                        <label>{{(infoData.formData[3])?(infoData.formData[3].label):''}}</label>
+                        <input class="form-control input-sty" name="sms_sent" type="text" [value]="formInputs.inputData4" disabled>
+                    </div>
+                    <div class="col-4" *ngIf="infoData.modalType == 'invoice'">
+                        <label>{{(infoData.formData[3])?(infoData.formData[3].label):''}}</label>
+                        <input class="form-control input-sty" name="sms_sent" type="text" [value]="formInputs.inputData4" disabled>
+                    </div>
+                    <div class="col-4" *ngIf="infoData.modalType == 'invoice'">
+                        <label>{{(infoData.formData[8])?(infoData.formData[8].label):''}}</label>
+                        <input class="form-control input-sty" name="entry_date" type="text" [value]="formInputs.inputData9" disabled>
+                    </div> -->
+
+                </div>
+                <!-- <div class="modal-body row">
+                    <div class="col-4 form-group">
+                        <label>{{(infoData.formData[4])?(infoData.formData[4].label):''}}</label>
+                        <input class="form-control input-sty" name="entry_date" type="text" [value]="formInputs.inputData5" disabled>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label>{{(infoData.formData[5])?(infoData.formData[5].label):''}}</label>
+                        <input class="form-control input-sty" name="expiry_date" type="text" [value]="formInputs.inputData6" disabled>
+                    </div>
+                </div>
+                <div class="modal-body row">
+
+                    <div class="col-4 form-group">
+                        <label>{{(infoData.formData[6])?(infoData.formData[6].label):''}}</label>
+                        <input class="form-control input-sty" name="amount" type="text" [value]="formInputs.inputData7" disabled>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label>{{(infoData.formData[7])?(infoData.formData[7].label):''}}</label>
+                        <input class="form-control input-sty" name="late_fee" type="text" [value]="formInputs.inputData8" disabled>
+                    </div>
+
+                </div> -->
+
+                <div class="modal-footer">
+                    <div class="col-12">
+
+                        <div class="col-12 text-right">
+                            <button type="button" class="btn btn-wht mar-rgt" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+                            <button type="button" class="btn btn-pri">Download</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

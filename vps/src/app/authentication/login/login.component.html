@@ -1,0 +1,138 @@
+<div class="login_container">
+
+    <div class="row">
+        <div class="col-lg-3 col-md-6"></div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 border-container">
+            <img class="img-wid" src="assets/image/vps_logo.png">
+            <form class="col-12" [formGroup]="loginForm">
+                <div class="main-content">
+                    <div class="mtb-15">
+
+
+                        <div class="col-md-12">
+                            <label for="username" class="col-12 mar-top-10 blue_text">Use your Account</label>
+                            <label for="email" class="col-12 col-form-label">{{labels?.email}}</label>
+                            <div class="col-md-12">
+                                <app-custom-input [id]="'email'" formControlName="userName" [placeHolder]="'E-mail'" [isRequired]="'E-mail is Mandatory'" [isDirty]="isDirty" [type]="'email'" [patternCheck]="validations?.validationData.email.patternCheck">
+                                </app-custom-input>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="password" class="col-12 col-form-label ">{{labels?.password}}</label>
+                            <div class="col-12">
+                                <app-custom-input [id]="'password'" formControlName="password" [placeHolder]="'Password'" [isRequired]="'Password is Mandatory'" [isDirty]="isDirty" [type]="'password'">
+                                </app-custom-input>
+                            </div>
+                        </div>
+                        <!-- <div class="col-12">
+                        <div class="col-12 mar-top-30">
+                            <span id="" class="check_btn">
+                                <input 
+                                    type="checkbox" 
+                                    id="eye"
+                                    disabled
+                                    onclick="if(reg_password.type=='text')reg_password.type='password'; else reg_password.type='text';" 
+                                />
+                            </span>
+                            <input 
+                                type="text" id="reg_password" 
+                                name="reg_password" 
+                                class="form-control input-lg"
+                                placeholder="&nbsp;  &nbsp; &nbsp;Forgot Email" 
+                                ng-model="register_password" 
+                                readonly 
+                            />
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="col-12 mar-top-30">
+                            <span id="" class="check_btn">
+                                <input 
+                                    type="checkbox" 
+                                    id="eye"
+                                    disabled
+                                    onclick="if(reg_password.type=='text')reg_password.type='password'; else reg_password.type='text';" 
+                                />
+                            </span>
+                            <input type="text" id="create_new" name="create_new" class="form-control input-lg" placeholder="&nbsp;  &nbsp; &nbsp;Create New Account / Register " ng-model="register_password" readonly />
+                        </div>
+                    </div> -->
+                        <div class="col-md-12  text-center">
+                            <button type="submit" class="btn btn-animate btn-blue submit-btn m-3 p-2" data-toggle="modal" data-target="#myModal_newcampaign" (click)="login()">{{labels?.signIn}}
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+
+        <div class="col-lg-3 col-md-6"></div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 second-div">
+            <div class="row mar-80">
+                <div class="square-box contentOne ">
+                    <div class="row ">
+                        <div class="img-content">
+                            <img src="assets/image/process.png">
+                        </div>
+                        <div class="text-content">
+                            <label class="card-font">Intelligent Process Automation</label>
+                        </div>
+                    </div>
+                    <div>
+                        <hr class="mar-5">
+                        <p class="grey-font">Low-Code<br />Smart BPM Solutions</p>
+                    </div>
+                </div>
+                <div class="square-box contentTwo">
+                    <div class="row ">
+                        <div class="img-content">
+                            <img src="assets/image/customer-insight.png">
+                        </div>
+                        <div class="text-content">
+                            <label class="card-font">Hyper Personiliation</label>
+                        </div>
+                    </div>
+                    <div>
+                        <hr class="mar-5">
+                        <p class="grey-font">Actionable Conversation<br />Dynamic Richards</p>
+                    </div>
+                </div>
+                <div class="square-box contentThree">
+                    <div class="row ">
+                        <div class="img-content">
+                            <img src="assets/image/artificial-intelligence.png">
+                        </div>
+                        <div class="text-content">
+                            <label class="card-font">Natural Language Processing</label>
+                        </div>
+                    </div>
+                    <div>
+                        <hr class="mar-5">
+                        <p class="grey-font">Intent Fulfilment<br /> End-to-End workflows</p>
+                    </div>
+                </div>
+                <div class="square-box contentFour">
+                    <div class="row ">
+                        <div class="img-content">
+                            <img src="assets/image/headset.png">
+                        </div>
+                        <div class="text-content">
+                            <label class="card-font">Cloud Support</label>
+                        </div>
+                    </div>
+                    <div>
+                        <hr class="mar-5">
+                        <p class="grey-font">Live Agent<br />Real time Support</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div> -->
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,41 @@
+/* .modal-backdrop {
+    background-color: transparent !important;
+ } */
+
+.dis-block {
+    display: block;
+}
+
+.visibile-hide {
+    visibility: hidden;
+}
+
+
+/* .modal-top {
+    top: -10% !important;
+} */
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 1000px;
+        margin: 1.75rem auto;
+    }
+}
+
+.hr-style {
+    border: 1px solid #ddd;
+    width: 95%;
+}
+
+.background-opacity {
+    background-color: #00000054;
+}
+
+.testClass {
+    transition: all 15s ease-in;
+    transform: scale(20);
+}
+
+.mar-rgt {
+    margin-right: 5px;
+}

@@ -1,0 +1,82 @@
+<app-retailer-status></app-retailer-status>
+
+<!-- <form>
+    <div class="row content-container">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+
+            <div class="row btn-con">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 provisioning_cls">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 create_cls">
+                    <button class="btn create_new" id="create_new" (click)="OnCreateNewEnterprise()">Create New Enterprise
+                    </button>
+                </div>
+            </div>
+
+            <div class="row topnav">
+                <div class="search-container mar-top-10">
+                   
+
+                    <form [formGroup]="searchForm">
+
+                        <input type="text" placeholder="Search" formControlName="searchInp" name="search" autocomplete="off" (input)="searchData($event)">
+
+                        <button class="outline-remove" *ngIf="searchForm.get('searchInp').value.length == 0"><i class="fa fa-search"></i></button>
+
+                        <button *ngIf="searchForm.get('searchInp').value.length > 0" class="outline-remove" (click)="clearTxt()"><i class="fa fa-times"></i></button>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <hr class="search-hr">
+            <div class="row" *ngIf="isNoRecord">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <p><strong class="grey-color">Oops! No Records Found.</strong></p>
+                </div>
+            </div>
+            <div class="row scroll-div">
+                <div class="point-content pointer" (click)="onPatchEnterprise(list?.enterpriseId)" *ngFor="let list of enterpriseProvisionList  | paginate: { itemsPerPage: itemsPerPage, currentPage: page,totalItems: totalCount }">
+                    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6 font-wht">
+                        <i class="fa fa-circle" [ngClass]="{'deactive': list?.status === 'Deactive'}"></i>{{list?.enterpriseName}}
+                        <span>{{list?.status}}</span>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6 date-style">{{detectDateProcess(list?.createdOn)}} {{list?.createdOn | date:'dd/MM/yyy'}}</div>
+                    <div class="grid-container font-14">
+                        <div class="">
+                            Plan - {{list?.plan}}
+                        </div>
+                        <div class="">
+                            Journey - {{list?.journey}}
+                        </div>
+                        <div class="">
+                            Encap - {{list?.encap}}
+                        </div>
+                        <div class="">
+                            Campaign - {{list?.camapaign}}
+                        </div>
+                        <div class="">
+                            Agent - {{list?.agent}}
+                        </div>
+                        <div class="">
+                            Tickets - {{list?.tickets}}
+                        </div>
+                    </div>
+                    <hr class="hr-style">
+                </div>
+            </div>
+            <div class="row mt-3" *ngIf="!isNoRecord">
+                <div class="col-md-12 text-left pageFont">
+                    <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12 chart-box">
+            <app-dashboard-lazy></app-dashboard-lazy>
+        </div>
+    </div>
+
+</form> -->

@@ -1,0 +1,298 @@
+.ng-autocomplete{
+    width: auto !important;
+}
+
+:host ::ng-deep .autocomplete-container{
+    box-shadow: none;
+}
+
+:host ::ng-deep .autocomplete-container .input-container input {
+
+    border: 1px solid #ced4da;
+    border-radius: 15px;
+    font-size: 12px;
+    box-sizing: border-box;
+    box-shadow: none;
+    outline: 0;
+    background-color: #fff;
+    color: #495057;
+    width: 100%;
+    padding: 0 15px;
+    line-height: 40px;
+    /* height: 33px; */
+}
+
+:host ::ng-deep .autocomplete-container .suggestions-container ul li a{
+    font-size: 12px;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+
+:host ::ng-deep .autocomplete-container .input-container .x {
+    /* display: none; */
+    position: absolute;
+    right: 45px;
+    margin: auto;
+    cursor: pointer;
+    top: 43%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+}
+
+:host ::ng-deep .autocomplete-container .input-container .x i {
+    color: rgba(0,0,0,.54);
+    font-size: 17px;
+    vertical-align: middle;
+
+}
+
+.img_arrow {
+
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 441px;
+    z-index: 5000;
+}
+
+ :host ::ng-deep .ng-select.ng-select-single .ng-select-container {
+    border: 1px solid #ced4da;
+    border-radius: 12px;
+
+}
+
+/* :host ::ng-deep .ng-select.ng-select-single .ng-select-container {
+    height: 33px;
+} */
+
+:host ::ng-deep .ng-select .ng-select-container {
+    color: #333;
+    background-color: #fff;
+    /* min-height: 0px; */
+    align-items: center;
+}
+
+:host ::ng-deep .iti {
+    display: block !important;
+}
+
+.edit-img{
+    background: #E6E8F8;
+    padding: 3px;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 50%;
+    width:100%;
+}
+
+.edit-icon{
+    position: absolute;
+    top: 80%;
+    left: 68%;
+    cursor: pointer;
+    width: 20%;
+}
+
+.box-padding{
+    padding:0px 5px;
+}
+
+.float-right img{
+    float:right;
+}
+img {
+    display: block;
+  
+    /* This rule is very important, please don't ignore this */
+    max-width: 100%;
+  }
+
+  .modal-backdrop {
+    background-color: transparent !important;
+ }
+
+ .fade:not(.show) {
+     opacity: 1;
+ }
+.dis-block {
+    display: block;
+}
+
+.modal-top {
+    top: -10% !important;
+}
+
+/* :host ::ng-deep .cropper-bg {
+    width: 500px!important;
+    height: 500px!important;
+} */
+
+/* -------------- MODAL CSS --------------- */
+
+
+.modal-notification{
+    width: 50%;
+    margin: auto;
+    border: 1px solid #e3e3e3;
+    border-radius: 35px;
+    position: absolute;
+    top: 30%;
+    right: 25%;
+    background:#fff;
+    font-size:13px;
+}
+.fa-trash{
+    color: red;
+    font-size: 13px;
+    float:left;
+    margin-top:10px;
+}
+
+
+
+.trash-btn{
+    float:left;
+}
+.cancel-btn{
+    background:#848DDB;
+    border:none;
+    border-radius:15px;
+    color:#fff;
+}
+
+/* modal */
+
+.vertical-alignment-helper {
+    display:table;
+    /* height: 90%; */
+    /* width: 100%; */
+    pointer-events:none;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+    /* width:800px; */
+    margin:auto 0px;
+}
+.modal-content {
+    border-radius: 15px;
+    /* width:inherit; */
+    margin: auto 50px;
+    pointer-events:all;
+    font-size:12px;
+    margin:auto 0px;
+    width: 80%;
+    margin: auto;
+}
+
+.modal-header{
+    border: none;
+    margin: 2px 5px 0px;
+}
+
+.modal-body{
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin: 0px 10px;
+    font-weight:500;
+    /* width:700px; */
+    margin:auto 0;
+   
+}
+
+.modal-body-2{
+    margin: 15px 15px 0px;
+
+}
+
+.modal-body-2 .fa {
+    margin-right:10px;
+}
+
+#myModal_crop{
+    background-color: #21252973;
+}
+
+/* updated modal */
+
+/* .modal-dialog vertical-alignment-helper{
+    width:700px;
+} */
+
+.modal-body{
+    margin:auto;
+}
+
+:host ::ng-deep .cropper {
+    top: 0px;
+    left:100px;
+    width:80%;   
+    height: 190px;
+    visibility: visible;
+}
+
+:host ::ng-deep .cropper-canvas{
+    width:100%!important;
+    left:100px;  
+    /* height: auto!important; */
+    transform: translateY(175.141px);
+    margin: auto!important;
+}
+
+:host ::ng-deep image-copper img{
+    text-align: center!important;
+}
+.font-bold{
+    font-weight:600;
+}
+
+.cropper{
+    top: 0px;
+    left: 100px;
+    width: 100%;
+    height: 100%;
+    visibility: visible;
+    /* right: 50px; */
+    /* margin: auto;*/
+}
+
+.overlay{
+    width:100%!important;
+    height:100%!important;
+}
+
+/* --------- END OF MODAL CSS ------------ */
+
+
+.inp-disable {
+    pointer-events: none;
+    background-color: #e9ecef;
+}
+
+input::placeholder{
+    color: #ccc;
+}
+
+textarea::placeholder{
+    color: #ccc;
+}
+
+.logo-disable{
+    pointer-events: none;
+}
+
+
+.wrong-info{
+    font-size: 12px;
+    font-family: zurich-bold;
+    letter-spacing: 0px;
+    color: red;
+    padding-top: 0.5vw;
+    line-height: 0.8vw;
+    padding-left: 14px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}

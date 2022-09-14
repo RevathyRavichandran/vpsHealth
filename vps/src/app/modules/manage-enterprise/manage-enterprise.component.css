@@ -1,0 +1,12 @@
+.color_blue {
+    color: cornflowerblue !important;
+}
+
+.color_blue:hover {
+    color: green !important;
+}
+
+.nav_link{
+    font-size: 12px;
+    font-weight: 700;
+}

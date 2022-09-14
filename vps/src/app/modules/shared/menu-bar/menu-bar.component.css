@@ -1,0 +1,109 @@
+* {
+    outline-color: hidden!important;
+}
+
+.btn:focus {
+    box-shadow: inset 0 -1px 0 #ddd !important;
+}
+
+.hr-style {
+    text-align: center;
+    width: 90%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+
+/* Updated */
+
+.grid-menu {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.grid-menu>div {
+    padding: 10px;
+}
+
+.grid-one {
+    text-align: center;
+}
+
+.grid-one img {
+    width: 100px;
+}
+
+.grid-two {
+    text-align: left;
+}
+
+.max_width {
+    width: max-content;
+}
+
+.version-class {
+    position: fixed;
+    bottom: 0px;
+    color: #fff;
+    font-size: 12px;
+    background-color: #00000042;
+    width: 16.5%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.pad-left {
+    padding-left: 20%;
+}
+
+.accordion-menu .max_width {
+    width: 100%;
+}
+
+.shadow-none {
+    position: fixed;
+    margin: 0;
+    width: 16.55%;
+}
+
+.admin-span {
+    background-color: #848DDB;
+    border: 1px solid #848DDB;
+    color: black;
+    padding: 3px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #fff;
+    width: 30%;
+    margin: 5px auto;
+}
+
+.admin-span:hover {
+    color: #fff;
+}
+
+.menu-bar {
+    width: 90%;
+    padding-right: 0px;
+}
+
+.icon-bar {
+    width: 10%;
+    padding: 0px;
+}
+
+
+/* .content-box{
+    margin: 10px 10px;
+    
+} */
+
+@media screen and (min-width: 250px) and (max-width:768px) {
+    .grid-menu>div {
+        padding: 10px;
+        text-align: center;
+    }
+}

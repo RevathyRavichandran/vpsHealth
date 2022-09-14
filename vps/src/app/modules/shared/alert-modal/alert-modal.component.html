@@ -1,0 +1,22 @@
+<div class="modal fade" id="myModal_newcampaign" *ngIf="data.title" [ngClass]="{'dis-block':data.title,'show': data.title}" role="dialog" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-top" style="max-width:900px;">
+
+        <div class="modal-content mx-auto p-3">
+            <div class="modal-header pl-0">
+               <div class="col-md-3 p-0">
+                <span class="float-left">{{data.title}}</span>
+               </div>
+            </div>
+
+            <div class="card mt-3 mb-3 border-0">
+
+                {{data.content}}
+                <div class="modal-footer mt-3">
+                    <button type="button" class="btn btn-secondary border-primary bg-white text-primary" data-dismiss="modal"  *ngIf="data.cancelLabel" (click)="cancelBtn()">{{ data.cancelLabel }}</button>
+                    <button type="button" class="btn btn-Primary bg-primary text-white text-white" data-dismiss="modal" *ngIf="data.okLabel" (click)="okBtn()">{{data.okLabel}}</button>
+                 </div>
+            </div>
+        </div>
+
+    </div>
+</div>

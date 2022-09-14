@@ -1,0 +1,25 @@
+<!-- <select
+  [class]="className"
+  [(ngModel)]="selectedOption"
+  [disabled]="isDisabled"
+  (blur)="onBlurMethod($event)"
+>
+  <option value="{{ defaultOption.key }}" [disabled]="isDefaultDisabled">{{
+    defaultOption.value
+  }}</option>
+  <option value="{{ option[keyField] }}" *ngFor="let option of values">{{
+    option[valueField]
+  }}</option>
+  
+</select> -->
+<ng-select [placeholder]="placeholder" 
+      [(ngModel)]="selectedOption" [items]="values" bindLabel="value" bindValue="key"
+      [closeOnSelect]="true" (blur)="onBlurMethod($event)" [disabled]="isDisabled" (clear)="onClear()"
+      (scrollToEnd)="onScrollEnd()" [loading]='loading' >
+</ng-select>
+     
+<div class="error-feedback" *ngIf="inputError">
+  <div>
+    {{ isRequired }}
+  </div>
+</div>

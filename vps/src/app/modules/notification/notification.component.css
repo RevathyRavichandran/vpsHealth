@@ -1,0 +1,151 @@
+.msg-content{
+    width:300px;
+    /* height:400px; */
+    border-radius:15px;
+    border: 1px solid #dddddd;
+    padding: 10px 10px 1px;
+    box-shadow: 0px 0px 5px 0px #ddd;
+}
+
+.mar-0{
+    margin: auto 0;
+}
+
+.user-con{
+    border-radius: 8px;
+    margin: 15px 0px 5px;
+    border:1px solid #ddd;
+    box-shadow: 0px 0px 10px 0px #ddd;
+    text-align: center;
+}
+
+.search-container .fa{
+    
+  color: #848DDB;
+   
+}
+
+.topnav input[type=text] {
+    width: 600px;
+    padding: 10px 5px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+    border-radius: 18px;
+    background: #e4f1ef;
+}
+
+.topnav .search-container button {
+    /* float: right; */
+    padding: 5px 2px;
+    margin-top: 10px;
+    /* margin-right: 16px; */
+    background: #e4f1ef;
+    font-size: 19px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    /* top: 10px; */
+    left: 580px;
+    border-radius: 13px;
+}
+
+
+
+
+
+@media screen and (max-width: 600px) {
+    .topnav .search-container {
+      float: none;
+    }
+    .topnav a, .topnav input[type=text], .topnav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .topnav input[type=text] {
+      border: 1px solid #ccc;  
+    }
+  }
+
+
+  /* -------------- MODAL CSS --------------- */
+
+
+.modal-notification{
+    width: 50%;
+    margin: auto;
+    border: 1px solid #e3e3e3;
+    border-radius: 35px;
+    position: absolute;
+    top: 30%;
+    right: 25%;
+    background:#fff;
+    font-size:13px;
+}
+.fa-trash{
+    color: red;
+    font-size: 13px;
+    float:left;
+    margin-top:10px;
+}
+
+
+
+.trash-btn{
+    float:left;
+}
+.cancel-btn{
+    background:#848DDB;
+    border:none;
+    border-radius:15px;
+    color:#fff;
+}
+
+/* modal */
+
+.vertical-alignment-helper {
+    display:table;
+    height: 90%;
+    width: 100%;
+    pointer-events:none;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    border-radius: 15px;
+    width:inherit;
+    margin: auto 50px;
+    pointer-events:all;
+    font-size:12px;
+}
+
+.modal-header{
+    border: none;
+    margin: 2px 5px 0px;
+}
+
+.modal-body{
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin: 0px 10px;
+    font-weight:500;
+}
+
+.modal-body-2{
+    margin: 15px 15px 0px;
+
+}
+
+.modal-body-2 .fa {
+    margin-right:10px;
+}
+
+/* --------- END OF MODAL CSS ------------ */

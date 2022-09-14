@@ -1,0 +1,34 @@
+<div class="modal fade background-opacity" id="confirmModal" tabindex="-1" *ngIf="showConfirmModal" [ngClass]="{'dis-block':showConfirmModal,'show': showConfirmModal}" role="dialog" aria-labelledby="confirmModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog vertical-alignment-helper" role="document">
+    <div class="vertical-align-center">
+      <div class="modal-content">
+        <div class="modal-header">
+         <span class="font-blk">{{data.title}}</span> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeConfirmModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <hr class="hr-style">
+        
+        
+        <div class="modal-body row">
+       
+         {{data.content}}
+
+        </div>
+
+        <div class="modal-footer">
+          <div class="col-12">
+
+            <div class="col-12 text-right">
+              <button type="button" class="btn btn-wht mar-rgt" data-dismiss="modal" (click)="closeConfirmModal()">Cancel</button>&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-pri" (click)="submitConfirmModal()">Submit</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

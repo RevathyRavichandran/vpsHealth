@@ -1,0 +1,20 @@
+<div class="row main-container m-0">
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 side-bar">
+        <app-menu-bar></app-menu-bar>
+    </div>
+    <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 p-0" style="margin-left: auto; background-color: #fafafa;">
+        <div id="page-content-wrapper">
+            <!-- <nav class="navbar navbar-expand-lg">
+               <button class="btn btn-pri" id="menu-toggle">Toggle Menu</button>                
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>-->
+            <div class="container-fluid content-box mt-2 ">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

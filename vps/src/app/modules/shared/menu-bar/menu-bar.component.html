@@ -1,0 +1,112 @@
+<div class="shadow-none" id="sidebar-wrapper">
+    <div class="sidebar-heading grid-menu">
+        <div class="grid-one pointer" (click)="goToDashboard()">
+            <img src="assets/image/vps_logo.png">
+        </div>
+    </div>
+    <hr class="hr-style">
+
+    <div class="" id="accordionExample">
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="onDashboard()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '1'}" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <img class="side-icon" src="assets/image/Dashboard icon.png">Dashboard
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseOne" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="onAppointment()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '2'}" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <img class="side-icon" src="assets/image/Book_appointment.png">Appointment
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="onFeedback()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '3'}" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <img class="side-icon" src="assets/image/Feedback icon.png">Feedback
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseThree" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="onTickets()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '4'}" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <img class="side-icon" src="assets/image/Ticket icon.png">Live Agent
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseFour" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button class="btn accordion" (click)="onMilestone()" [ngClass]="{'active': selectedNavTab === '5'}" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <img class="side-icon" src="assets/image/milestone_icon.png">Milestone
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseFive" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+
+
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="onVisitors()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '6'}" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <img class="side-icon" src="assets/image/suitcase.png">Conversion
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseSix" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="onMatrix()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '7'}" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            <img class="side-icon" src="assets/image/metrics.png">Metrics
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseSeven" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="logOut()" class="btn accordion" type="button">
+                            <img class="side-icon" src="assets/image/power-off.png">Logout
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseEight" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+
+    </div>
+    <!-- <p class="version-class">Version 1.0</p> -->
+</div>
