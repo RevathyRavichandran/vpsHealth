@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter, Input, OnChanges, HostListener } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DateRangeService } from '@services/date-range.service';
 import { ToasterService } from '@services/toaster.service';
@@ -56,6 +56,13 @@ export class CustomListComponent implements OnInit, OnChanges {
 
     this.formDetails = value?.formDetails;
     this.isShow = true;
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+        this.apply();
+    }
   }
 
 

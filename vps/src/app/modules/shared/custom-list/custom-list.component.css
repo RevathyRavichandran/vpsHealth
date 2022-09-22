@@ -610,3 +610,7 @@ body { font-family: sans-serif;}  */
     word-break: break-all;
     width: 30%;
 }
+
+.sno-width {
+    width: 60px;
+}

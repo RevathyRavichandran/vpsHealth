@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { EnterpriseApiService } from '@services/enterprise-api.service'
 import { ToasterService } from '@services/toaster.service';
 import { UtilityService } from '@services/utility.service';
@@ -19,6 +19,11 @@ export class AppointmentComponent implements OnInit {
   showTicketModal: boolean;
 
   visitorsList: any;
+  patientList: any = [];
+  regionList: any = [];
+  branchList: any = [];
+  deptList: any = [];
+  physicianList: any = [];
   searchDatas: any;
   attachments: any;
   totalRecords: any;
@@ -29,7 +34,17 @@ export class AppointmentComponent implements OnInit {
       {
         label: 'Language',
         controlName: 'language',
-        type: 'input'
+        type: 'select',
+        list:[
+          {
+            key: 'English',
+            value: 'English'
+          },
+          {
+            key: 'Arabic',
+            value: 'Arabic'
+          }
+        ]
       },
       {
         label: 'Patient Id',
@@ -44,22 +59,26 @@ export class AppointmentComponent implements OnInit {
       {
         label: 'Region',
         controlName: 'regionFilter',
-        type: 'input'
+        type: 'select',
+        list:this.regionList
       },
       {
         label: 'Branch',
         controlName: 'facilityFilter',
-        type: 'input'
+        type: 'select',
+        list:this.branchList
       },
       {
         label: 'Department',
         controlName: 'departmentNameFilter',
-        type: 'input'
+        type: 'select',
+        list:this.deptList
       },
       {
         label: 'Physician name',
         controlName: 'physicianNameFilter',
-        type: 'input'
+        type: 'select',
+        list: this.physicianList
       },
       
       // {
@@ -68,18 +87,49 @@ export class AppointmentComponent implements OnInit {
       //   type: 'input'
       // }
     ],
-    header: ['Language', "Patient Id",  "Appointment Id", "Region", "Branch", "Department", "Physician Name", "Appointment Date", "Created Date&Time" ], // table headers
+    header: ['SNo', "Date & Time", 'Language', "Patient Id",  "Appointment Id", "Region", "Branch", "Department", "Physician Name", "Appointment Date", "Slot Time" ], // table headers
   }
   customListDatas: {};
 
   constructor(
     private enterpriseService: EnterpriseApiService,
     private toasterService: ToasterService,
-    private utilityService: UtilityService
-  ) {}
+    private utilityService: UtilityService 
+  ) {
+    // this.getAppointmentPatientList();
+  }
 
-  ngOnInit(): void {
-    this.getAppointmentList()
+  ngOnInit(): void {    
+    
+    this.getAppointmentList();    
+  }
+
+  async getAppointmentPatientList() {
+    const params = {
+    }
+
+    console.log('params', params);
+
+    const visitors: any = await this.enterpriseService.getAppointmentPatientId(params);
+
+    console.log('Visitors', visitors)
+
+    const appiyoError = visitors?.Error;
+    if (appiyoError == '0') {
+
+      const processVariables = visitors['ProcessVariables']
+      
+      this.regionList = processVariables['regionList'] || [];
+      this.branchList = processVariables['branchList'] || [];
+      this.deptList = processVariables['deptList'] || [];
+      this.physicianList = processVariables['physicianList'] || [];
+      // console.log('test', this.patientList[0].label)
+      // this.changeDetectorRef.detectChanges(); 
+
+      
+    } else {
+      this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'patient id list error' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
   }
 
   async getAppointmentList(searchData?) {
@@ -91,6 +141,15 @@ export class AppointmentComponent implements OnInit {
       ...searchData
     }
 
+    if(this.regionList.length==0) {
+      await this.getAppointmentPatientList();
+      this.initValues.formDetails[2].list = this.regionList;
+      this.initValues.formDetails[3].list = this.branchList;
+      this.initValues.formDetails[4].list = this.deptList;
+      this.initValues.formDetails[5].list = this.physicianList;
+    }
+   
+      
     console.log('params', params);
 
     const visitors: any = await this.enterpriseService.getAppointmentList(params);
@@ -102,14 +161,13 @@ export class AppointmentComponent implements OnInit {
     const errorMessage = visitors.ProcessVariables?.errorMessage;
 
     if (appiyoError == '0' && apiErrorCode == "200") {
-
       const processVariables = visitors['ProcessVariables']
       this.itemsPerPage = processVariables['perPage'];
       let totalPages = processVariables['totalPages'];
       this.totalCount = Number(this.itemsPerPage) * Number(totalPages);
       this.totalRecords = processVariables?.totalItems;
       this.visitorsList = processVariables['appointmentList'] || [];
-
+      
       this.customListDatas = {
         itemsPerPage: this.itemsPerPage,
         perPage: this.page,
@@ -117,7 +175,7 @@ export class AppointmentComponent implements OnInit {
         totalRecords: this.totalRecords,
         data: this.visitorsList,
         appointment : true,
-        keys: ['language', "patientId", "appointmentReferenceNumber", "regionName", "facilityName", "departmentName", "physicianName", "appointmentDate", "createdDateAndTime"],  // To get the data from key
+        keys: ['SNo', "createdDateAndTime", 'language', "patientId", "appointmentReferenceNumber", "regionName", "facilityName", "departmentName", "physicianName", "appointmentDate", "slotStartTime"],  // To get the data from key
       }
 
     } else {

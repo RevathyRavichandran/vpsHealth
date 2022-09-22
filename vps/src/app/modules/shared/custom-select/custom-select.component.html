@@ -12,7 +12,7 @@
   }}</option>
   
 </select> -->
-<ng-select [placeholder]="placeholder" 
+<ng-select [placeholder]="placeholder" [virtualScroll]="true"
       [(ngModel)]="selectedOption" [items]="values" bindLabel="value" bindValue="key"
       [closeOnSelect]="true" (blur)="onBlurMethod($event)" [disabled]="isDisabled" (clear)="onClear()"
       (scrollToEnd)="onScrollEnd()" [loading]='loading' >

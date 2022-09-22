@@ -55,7 +55,7 @@ export class ActivityComponent implements OnInit {
         type: 'input'
       }
     ],
-    header: ['Name', "Mobile Number","Activity", "status", "created Date & Time"], // table headers
+    header: ['SNo', 'Name', "Mobile Number","Activity", "status", "Date & Time"], // table headers
   }
   attachments: any;
   totalRecords: any;
@@ -107,7 +107,7 @@ export class ActivityComponent implements OnInit {
         totalCount: this.totalCount,
         totalRecords: this.totalRecords,
         data: this.activityList,
-        keys: ['name', "mobileNumber","activityName", "isStatus", "createdDateAndTime"],  // To get the data from key
+        keys: ['SNo', 'name', "mobileNumber","activityName", "isStatus", "createdDateAndTime"],  // To get the data from key
       }
 
     

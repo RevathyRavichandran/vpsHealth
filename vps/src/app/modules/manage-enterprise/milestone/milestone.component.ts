@@ -19,6 +19,9 @@ export class MilestoneComponent implements OnInit {
   itemsPerPage: number = 8;
   totalCount: number;
   
+  wabaList: any =[];
+  mileStoneList: any = [];
+
   searchFromDate: any;
   searchToDate: any;
   milestoneList: any;
@@ -34,11 +37,11 @@ export class MilestoneComponent implements OnInit {
         controlName: 'mobileNumber',
         type: 'input',
       },
-      {
-        label: 'Patient Id',
-        controlName: 'patientId',
-        type: 'input',
-      },
+      // {
+      //   label: 'Patient Id',
+      //   controlName: 'patientId',
+      //   type: 'input',
+      // },
       {
         label: 'Status',
         controlName: 'status',
@@ -57,16 +60,18 @@ export class MilestoneComponent implements OnInit {
       {
         label: 'Waba Number',
         controlName: 'waba_no',
-        type: 'input',
+        type: 'select',
+        list: this.wabaList
       },
-      // {
-      //   label: 'Milestone',
-      //   controlName: 'milestone',
-      //   type: 'input',
-      // }
+      {
+        label: 'Milestone',
+        controlName: 'milestone',
+        type: 'select',
+        list: this.mileStoneList
+      }
     ],
    
-    header: ['Patient id', "Mobile Number","Milestone", "status", "Waba Number", "created Date & Time"], // table headers
+    header: ['SNo', "Date & Time", "Mobile Number", "Waba Number", 'Patient id',"Milestone", "status"], // table headers
   }
   customListDatas= {};
   
@@ -84,6 +89,32 @@ export class MilestoneComponent implements OnInit {
      this.getMilestoneList()
   }
 
+  async getMilestoneFilterList() {
+    const params = {
+    }
+
+    console.log('params', params);
+
+    const visitors: any = await this.enterpriseService.getMilestoneFilter(params);
+
+    console.log('Visitors', visitors)
+
+    const appiyoError = visitors?.Error;
+    if (appiyoError == '0') {
+
+      const processVariables = visitors['ProcessVariables']
+      
+      this.wabaList = processVariables['wabaList'] || [];
+      this.mileStoneList = processVariables['milestoneList'] || [];
+      // console.log('test', this.patientList[0].label)
+      // this.changeDetectorRef.detectChanges(); 
+
+      
+    } else {
+      this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'patient id list error' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
+  }
+
   async getMilestoneList(searchData?) {
 
     const params = {
@@ -92,6 +123,12 @@ export class MilestoneComponent implements OnInit {
       isApplyFilter: false,
       isCSVDownload: true,
       ...searchData
+    }
+
+    if(this.wabaList.length==0) {
+      await this.getMilestoneFilterList();
+      this.initValues.formDetails[2].list = this.wabaList;
+      this.initValues.formDetails[3].list = this.mileStoneList;
     }
 
     console.log('params', params);
@@ -121,7 +158,7 @@ export class MilestoneComponent implements OnInit {
         totalRecords: this.totalRecords,
         data: this.milestoneList,
         appointment : true,
-        keys: ['patientId', "mobileNumber","milestone","isStatus", "waba_no", "createdDateAndTime"],  // To get the data from key
+        keys: ['SNo', "createdDateAndTime", "mobileNumber", "waba_no", 'patientId',"milestone","isStatus"],  // To get the data from key
       }
 
       

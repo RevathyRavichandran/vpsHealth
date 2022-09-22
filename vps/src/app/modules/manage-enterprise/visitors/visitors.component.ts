@@ -17,6 +17,8 @@ export class VisitorsComponent implements OnInit {
   ticketData: any;
   showTicketModal: boolean;
 
+  wabaList: any = [];
+
   visitorsList: any;
   searchDatas: any;
   attachments: any;
@@ -33,7 +35,8 @@ export class VisitorsComponent implements OnInit {
       {
         label: 'Waba Number',
         controlName: 'waba_no',
-        type: 'input'
+        type: 'select',
+        list: this.wabaList
       },
       // {
       //   label: 'Name',
@@ -41,7 +44,7 @@ export class VisitorsComponent implements OnInit {
       //   type: 'input'
       // }
     ],
-    header: ['Mobile Number', "Action", "Waba Number", "created Date" , "Time"], // table headers
+    header: ['SNo', "Date" , "Time", 'Mobile Number', "Waba Number", "Action"], // table headers
   }
   customListDatas: {};
   appointmentRating: any;
@@ -58,6 +61,31 @@ export class VisitorsComponent implements OnInit {
     this.getAppointmentConversationList()
   }
 
+  async getConversionFilter() {
+    const params = {
+    }
+
+    console.log('params', params);
+
+    const visitors: any = await this.enterpriseService.getConversionFilter(params);
+
+    console.log('Visitors', visitors)
+
+    const appiyoError = visitors?.Error;
+    if (appiyoError == '0') {
+
+      const processVariables = visitors['ProcessVariables']
+      
+      this.wabaList = processVariables['wabaList'] || [];
+      // console.log('test', this.patientList[0].label)
+      // this.changeDetectorRef.detectChanges(); 
+
+      
+    } else {
+      this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'patient id list error' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
+  }
+
   async getAppointmentConversationList(searchData?) {
     const params = {
       currentPage: this.page || 1,
@@ -67,8 +95,13 @@ export class VisitorsComponent implements OnInit {
       ...searchData
     }
 
+    if(this.wabaList.length==0) {
+      await this.getConversionFilter();
+      this.initValues.formDetails[0].list = this.wabaList;
+    }
+
     console.log('params', params);
-    if (!params.fromDate) {
+    if (!params.fromDate && !params.toDate && !params.waba_no) {
       params.fromDate = moment().format("YYYY-MM-DD"),
       params.toDate = moment().format("YYYY-MM-DD")
     }
@@ -88,7 +121,7 @@ export class VisitorsComponent implements OnInit {
       let totalPages = processVariables['totalPages'];
       this.totalCount = Number(this.itemsPerPage) * Number(totalPages);
       this.totalRecords = processVariables?.totalItems;
-      this.totalVisitors = processVariables?.totalItems;
+      this.totalVisitors = processVariables?.totalCount;
       this.totalAppointment = processVariables?.totalAppointment;
       this.appointmentRating = processVariables?.appointmentRating;
       this.visitorsList = processVariables['appointmentConversionList'] || [];
@@ -104,7 +137,7 @@ export class VisitorsComponent implements OnInit {
         conversion : true,
         appointment : false,
         data: this.visitorsList,
-        keys: ['mobileNumber', "isVisitorORBookedUser", "waba_no", "createdDate", "createdTime"],  // To get the data from key
+        keys: ['SNo', "createdDate", "createdTime", 'mobileNumber', "waba_no", "isVisitorORBookedUser"],  // To get the data from key
       }
 
     } else {

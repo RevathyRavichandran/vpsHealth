@@ -18,6 +18,8 @@ export class AllTicketsComponent implements OnInit {
   searchFromDate: any = '';
   searchToDate: any = '';
  
+  wabaList: any = [];
+
   searchDatas: any;
   attachments: any;
   totalRecords: any;
@@ -27,7 +29,17 @@ export class AllTicketsComponent implements OnInit {
       {
         label: 'Language ',
         controlName: 'language',
-        type: 'input'
+        type: 'select',
+        list:[
+          {
+            key: 'English',
+            value: 'English'
+          },
+          {
+            key: 'Arabic',
+            value: 'Arabic'
+          }
+        ]
       },
       {
         label: 'Patient Id',
@@ -41,12 +53,13 @@ export class AllTicketsComponent implements OnInit {
       },
       {
         label: 'Waba Number',
-        controlName: 'wabaNumber',
-        type: 'input'
+        controlName: 'WABANumber',
+        type: 'select',
+        list: this.wabaList
       },
      
     ],
-    header: ['language', 'Patient ID', "Mobile Number","WABA No",  "Comments", "created Date & Time"], // table headers
+    header: ['SNo', "Date & Time", "Mobile Number","WABA No", 'language', 'Patient ID',  "Comments"], // table headers
   }
 
   customListDatas= {}
@@ -64,6 +77,31 @@ export class AllTicketsComponent implements OnInit {
     this.getLiveAgentData()
   }
 
+  async getFeedbackFilter() {
+    const params = {
+    }
+
+    console.log('params', params);
+
+    const visitors: any = await this.enterpriseService.getLiveAgentFilter(params);
+
+    console.log('Visitors', visitors)
+
+    const appiyoError = visitors?.Error;
+    if (appiyoError == '0') {
+
+      const processVariables = visitors['ProcessVariables']
+      
+      this.wabaList = processVariables['wabaList'] || [];
+      // console.log('test', this.patientList[0].label)
+      // this.changeDetectorRef.detectChanges(); 
+
+      
+    } else {
+      this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'patient id list error' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
+  }
+
   async getLiveAgentData(searchData?) {
     const params = {
       currentPage: this.page || 1,
@@ -71,6 +109,11 @@ export class AllTicketsComponent implements OnInit {
       isApplyFilter: false,
       isCSVDownload: true,
       ...searchData
+    }
+
+    if(this.wabaList.length==0) {
+      await this.getFeedbackFilter();
+      this.initValues.formDetails[3].list = this.wabaList;
     }
 
     console.log('params', params)
@@ -101,7 +144,7 @@ export class AllTicketsComponent implements OnInit {
         totalRecords: this.totalRecords,
         data: this.allTickets,
         appointment : true,
-        keys: ["language",'patientId', "mobileNumber","WABANumber", "comment", "createdDateAndTime"],  // To get the data from key
+        keys: ['SNo', "createdDateAndTime", "mobileNumber","WABANumber", "language",'patientId', "comment"],  // To get the data from key
       }    
   } else {
       

@@ -59,8 +59,8 @@ export class ApiIdsService {
       projectId: environment.projectIds.vps
     },
     getChartData: {
-      workflowId: '47992b864dc811ecb55f0022480d6e6c',
-      processId: '47a8532c4dc811ecb55f0022480d6e6c',
+      workflowId: '19f8d2b634dc11ed87eb0242ac110002',
+      processId: '19f8d2b634dc11ed87eb0242ac110002',
       projectId: environment.projectIds.vps
     },
 
@@ -105,6 +105,37 @@ export class ApiIdsService {
       workflowId: 'e94189a8327c11ed8c9f0022480d6e6c',
       processId: 'e94189a8327c11ed8c9f0022480d6e6c',
       projectId: environment.projectIds.vps
-    }
+    },
+
+    appointmentPatientID: {
+      workflowId: 'acc5316837e611ed8c760242ac110002',
+      processId: 'acc5316837e611ed8c760242ac110002',
+      projectId: environment.projectIds.vps
+    },
+
+    feedbackFilter: {
+      workflowId: '89a69bac380611edbcdf0242ac110002',
+      processId: '89a69bac380611edbcdf0242ac110002',
+      projectId: environment.projectIds.vps
+    },
+
+    liveAgentFilter: {
+      workflowId: '68e874f23a3711edaa0a0242ac110002',
+      processId: '68e874f23a3711edaa0a0242ac110002',
+      projectId: environment.projectIds.vps
+    },
+
+    milestoneFilter: {
+      workflowId: '6019c08e3a3b11edbe9e0242ac110002',
+      processId: '6019c08e3a3b11edbe9e0242ac110002',
+      projectId: environment.projectIds.vps
+    },
+    
+    conversionFilter: {
+      workflowId: '76e71fae3a3c11ed8c760242ac110002',
+      processId: '76e71fae3a3c11ed8c760242ac110002',
+      projectId: environment.projectIds.vps
+    },
+    
   };
 }

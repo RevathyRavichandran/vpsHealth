@@ -447,4 +447,135 @@ export class EnterpriseApiService {
 
     });
   }
+
+  // filters
+  getAppointmentPatientId(data){
+    return new Promise((resolve, reject) => {
+      const processData = data;
+      const processId = this.apiService.api.appointmentPatientID.processId;
+      const workflowId = this.apiService.api.appointmentPatientID.workflowId;
+      const projectId = environment.projectIds.vps;
+      const body: RequestEntity = {
+        processId: processId,
+        ProcessVariables: processData,
+        workflowId: workflowId,
+        projectId: projectId
+      };
+
+
+      console.log("Body", body);
+      const url = `${environment.host}d/workflows/${workflowId}/${environment.apiVersion.api}execute?projectId=${projectId}`;
+
+      this.httpService.post(url, body, true).toPromise().then((res) => {
+        resolve(res)
+      }).catch((rejectRes) => {
+        reject(rejectRes);
+      });
+
+    });
+  }
+
+  getFeedbackFilter(data){
+    return new Promise((resolve, reject) => {
+      const processData = data;
+      const processId = this.apiService.api.feedbackFilter.processId;
+      const workflowId = this.apiService.api.feedbackFilter.workflowId;
+      const projectId = environment.projectIds.vps;
+      const body: RequestEntity = {
+        processId: processId,
+        ProcessVariables: processData,
+        workflowId: workflowId,
+        projectId: projectId
+      };
+
+
+      console.log("Body", body);
+      const url = `${environment.host}d/workflows/${workflowId}/${environment.apiVersion.api}execute?projectId=${projectId}`;
+
+      this.httpService.post(url, body, true).toPromise().then((res) => {
+        resolve(res)
+      }).catch((rejectRes) => {
+        reject(rejectRes);
+      });
+
+    });
+  }
+
+  getLiveAgentFilter(data){
+    return new Promise((resolve, reject) => {
+      const processData = data;
+      const processId = this.apiService.api.liveAgentFilter.processId;
+      const workflowId = this.apiService.api.liveAgentFilter.workflowId;
+      const projectId = environment.projectIds.vps;
+      const body: RequestEntity = {
+        processId: processId,
+        ProcessVariables: processData,
+        workflowId: workflowId,
+        projectId: projectId
+      };
+
+
+      console.log("Body", body);
+      const url = `${environment.host}d/workflows/${workflowId}/${environment.apiVersion.api}execute?projectId=${projectId}`;
+
+      this.httpService.post(url, body, true).toPromise().then((res) => {
+        resolve(res)
+      }).catch((rejectRes) => {
+        reject(rejectRes);
+      });
+
+    });
+  }
+
+  getMilestoneFilter(data){
+    return new Promise((resolve, reject) => {
+      const processData = data;
+      const processId = this.apiService.api.milestoneFilter.processId;
+      const workflowId = this.apiService.api.milestoneFilter.workflowId;
+      const projectId = environment.projectIds.vps;
+      const body: RequestEntity = {
+        processId: processId,
+        ProcessVariables: processData,
+        workflowId: workflowId,
+        projectId: projectId
+      };
+
+
+      console.log("Body", body);
+      const url = `${environment.host}d/workflows/${workflowId}/${environment.apiVersion.api}execute?projectId=${projectId}`;
+
+      this.httpService.post(url, body, true).toPromise().then((res) => {
+        resolve(res)
+      }).catch((rejectRes) => {
+        reject(rejectRes);
+      });
+
+    });
+  }
+
+  getConversionFilter(data){
+    return new Promise((resolve, reject) => {
+      const processData = data;
+      const processId = this.apiService.api.conversionFilter.processId;
+      const workflowId = this.apiService.api.conversionFilter.workflowId;
+      const projectId = environment.projectIds.vps;
+      const body: RequestEntity = {
+        processId: processId,
+        ProcessVariables: processData,
+        workflowId: workflowId,
+        projectId: projectId
+      };
+
+
+      console.log("Body", body);
+      const url = `${environment.host}d/workflows/${workflowId}/${environment.apiVersion.api}execute?projectId=${projectId}`;
+
+      this.httpService.post(url, body, true).toPromise().then((res) => {
+        resolve(res)
+      }).catch((rejectRes) => {
+        reject(rejectRes);
+      });
+
+    });
+  }
 }

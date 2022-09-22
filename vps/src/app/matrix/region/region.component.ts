@@ -42,6 +42,7 @@ export class RegionComponent implements OnInit {
 
   fromDate: any = '';
   toDate: any = '';
+  maxDate = new Date();
 
   @ViewChild('fromInput', {
     read: MatInput,

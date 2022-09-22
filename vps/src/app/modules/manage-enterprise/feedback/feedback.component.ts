@@ -20,6 +20,9 @@ export class FeedbackComponent implements OnInit {
   totalCount: number;
   searchFromDate: any;
   searchToDate: any;
+
+  wabaList: any = [];
+  branchList: any = [];
   
   feedbackList: any;
   searchDatas: any;
@@ -30,10 +33,25 @@ export class FeedbackComponent implements OnInit {
     title: 'Feedback',
     formDetails: [
       {
-        label: 'Domain',
-        controlName: 'domain',
-        type: 'input',
+        label: 'Language',
+        controlName: 'language',
+        type: 'select',
+        list:[
+          {
+            key: 'English',
+            value: 'English'
+          },
+          {
+            key: 'Arabic',
+            value: 'Arabic'
+          }
+        ]
       },
+      // {
+      //   label: 'Domain',
+      //   controlName: 'domain',
+      //   type: 'input',
+      // },
       // {
       //   label: 'Language',
       //   controlName: 'language',
@@ -42,32 +60,62 @@ export class FeedbackComponent implements OnInit {
       {
         label: 'Branch',
         controlName: 'facilityName',
-        type: 'input',
+        type: 'select',
+        list: this.branchList
       },
       // {
       //   label: 'Mobile Number',
       //   controlName: 'mobileNumber',
       //   type: 'input',
       // },
-      {
-        label: 'Patient Id',
-        controlName: 'patientId',
-        type: 'input',
-      },
       // {
-      //   label: 'Phase',
-      //   controlName: 'phase',
+      //   label: 'Patient Id',
+      //   controlName: 'patientId',
       //   type: 'input',
       // },
       {
+        label: 'Phase',
+        controlName: 'phase',
+        type: 'select',
+        list:[
+          {
+            key: 'LLP',
+            value: 'LLP'
+          },
+          {
+            key: 'VSP',
+            value: 'VSP'
+          }
+        ]
+      },
+      {
         label: 'Rating',
         controlName: 'rating',
-        type: 'input',
+        type: 'select',
+        list:[
+          {
+            key: 'Great',
+            value: 'Great'
+          },
+          {
+            key: 'Good',
+            value: 'Good'
+          },
+          {
+            key: 'Ok',
+            value: 'Ok'
+          },
+          {
+            key: 'Bad',
+            value: 'Bad'
+          }
+        ]
       },
       {
         label: 'Waba Number',
         controlName: 'waba_no',
-        type: 'input',
+        type: 'select',
+        list: this.wabaList
       },
       // {
       //   label: 'Comments',
@@ -75,7 +123,7 @@ export class FeedbackComponent implements OnInit {
       //   type: 'input',
       // },
     ],
-    header: [ "domain", "Branch", "Patient Id", "Phase", "Rating", "Waba Number", "Comment", "created Date & Time"], // table headers
+    header: [ "SNo", "Date & Time", "Mobile Number", "Waba Number", "Language", "Patient Id", "domain", "Branch", "Phase", "Rating", "Comment"], // table headers
   }
 
   customListDatas = {};
@@ -98,12 +146,44 @@ export class FeedbackComponent implements OnInit {
     this.getFeedBackList()
   }
 
+  async getFeedbackFilter() {
+    const params = {
+    }
+
+    console.log('params', params);
+
+    const visitors: any = await this.enterpriseService.getFeedbackFilter(params);
+
+    console.log('Visitors', visitors)
+
+    const appiyoError = visitors?.Error;
+    if (appiyoError == '0') {
+
+      const processVariables = visitors['ProcessVariables']
+      
+      this.wabaList = processVariables['wabaList'] || [];
+      this.branchList = processVariables['branchList'] || [];
+      // console.log('test', this.patientList[0].label)
+      // this.changeDetectorRef.detectChanges(); 
+
+      
+    } else {
+      this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'patient id list error' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
+  }
+
   async getFeedBackList(data?) {
     const params = {
       currentPage: this.page || 1,
       perPage: this.itemsPerPage || 10,
       isCSVDownload: true,
       ...data
+    }
+
+    if(this.wabaList.length==0) {
+      await this.getFeedbackFilter();
+      this.initValues.formDetails[4].list = this.wabaList;
+      this.initValues.formDetails[1].list = this.branchList;
     }
 
     console.log('params', params)
@@ -139,11 +219,11 @@ export class FeedbackComponent implements OnInit {
         data: this.feedbackList,
         appointment : true,
         feedback: true,
-        greatCount: params.rating == 'great' || !params.rating ? this.greatCount : 0,
-        goodCount : params.rating == 'good' || !params.rating ? this.goodCount : 0,
-        okCount : params.rating == 'ok' || !params.rating ? this.okCount : 0,
-        badCount : params.rating == 'bad' || !params.rating ? this.badCount : 0,
-        keys: ["domain", "facilityName", "patientId", "phase", "rating", "waba_no", "comment", "createdDateAndTime" ],  // To get the data from key
+        greatCount: params.rating == 'Great' || !params.rating ? this.greatCount : 0,
+        goodCount : params.rating == 'Good' || !params.rating ? this.goodCount : 0,
+        okCount : params.rating == 'Ok' || !params.rating ? this.okCount : 0,
+        badCount : params.rating == 'Bad' || !params.rating ? this.badCount : 0,
+        keys: ["SNo", "createdDateAndTime", "mobileNumber", "waba_no", "language", "patientId", "domain", "facilityName", "phase", "rating", "comment" ],  // To get the data from key
         //Table header length should be equal to keys
       }
       console.log(this.customListDatas)

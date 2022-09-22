@@ -88,7 +88,7 @@
                             <table class="main_table" [ngClass]="{'column-with-25':feedBackValue ,'agent-column': agentValue} ">
                                 <thead class="table_head">
                                     <tr>
-                                        <th *ngFor="let header of tableDetails?.header">{{header | uppercase}}</th>
+                                        <th *ngFor="let header of tableDetails?.header" [ngClass]="{'sno-width': header=='SNo'}">{{header | uppercase}}</th>
                                     </tr>
                                 </thead>
                                 <tbody *ngIf="dataArr?.length > 0">

@@ -63,6 +63,11 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     responsive: true,
     annotation: '',
     legend: {
+      labels: {
+        fontColor: 'black',
+        
+      },
+      
       position: 'top' // place legend on the right side of chart
    },
     
@@ -209,7 +214,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     this.lineChartType = "bar"; 
     this.lineChartColors = [
       {
-        borderColor: '#ba002a',
+        borderColor: '#EF7D2B',
       backgroundColor: this.bgColor
       },
     ]
@@ -251,6 +256,10 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     
   }
 
+  colorGenerator() {
+    return 'rgba(255, 99, 132, 0.2)';
+  } 
+
   async getChartResults() {
     if (this.lineChartData[0] && this.lineChartData[1] && this.lineChartData[2] && this.lineChartData[3]) {
       this.lineChartData[0].data = [];
@@ -275,7 +284,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
       this.processVariables = response?.ProcessVariables
      
-      if (appiyoError == '0' && apiErrorCode == "200") {
+      if (appiyoError == '0') {
   
         const graphCounts = this.processVariables.graphDateList;
         const year = this.processVariables.xAxis;
@@ -283,7 +292,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
         this.lineChartLabels = [];
         this.lineChartData = [{ data: [],
           // label: totalCount 
-          label : "Average Count  " + parseInt(totalCount)
+          label : "Average Count: " + parseInt(totalCount)
         }];
         let yAxis = []
         let xAxis = [];
@@ -436,6 +445,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
       this.lineChartData[1].data = [];
       this.lineChartData[2].data = [];
       this.lineChartData[3].data = [];
+      this.lineChartData.splice(1, this.lineChartData.length-1);
     } else if (this.lineChartData[0]) {
       this.lineChartData[0]['data'] = [];
     }  
