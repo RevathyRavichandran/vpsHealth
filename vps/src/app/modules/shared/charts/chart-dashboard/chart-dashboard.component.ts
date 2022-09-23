@@ -49,6 +49,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   public lineChartType: ChartType = "bar";
   public lineChartLegend = true;
   public lineChartPlugins = [];
+  nameOfCounts = 'VISITORS';
   public lineChartData: ChartDataSets[] = [
     
   ];
@@ -59,13 +60,14 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   //   },
     
   // };
+  wid = this.nameOfCounts == "VISITORS" ? 0 : 40;
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     annotation: '',
     legend: {
       labels: {
         fontColor: 'black',
-        
+        // boxWidth: this.wid
       },
       
       position: 'top' // place legend on the right side of chart
@@ -76,7 +78,11 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
             stacked: true // this should be set to make the bars stacked
          }],
          yAxes: [{
-            stacked: true // this also..
+            stacked: true,
+            gridLines: {
+              display: true,
+              color: "rgba(255,99,132,0.2)"
+           } // this also..
          }]
       }   
   };
@@ -84,7 +90,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   public lineChartColors: Color[] = [];
   processVariables: any;
   xAxisType = '1';
-  nameOfCounts = 'VISITORS'
+  
   feedBackCount: number;
   bgColor: string[];
   label: string;
@@ -201,6 +207,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
       backgroundColor:  '#F4C696'
       },
     ];
+    this.lineChartOptions.legend.labels.boxWidth=40;
     this.isShown = true;
   }
 
@@ -218,6 +225,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
       backgroundColor: this.bgColor
       },
     ]
+    this.lineChartOptions.legend.labels.boxWidth=0;
     this.isShown = false;
     
   }
@@ -235,6 +243,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
         backgroundColor:  'rgba(54, 162, 235, 0.8)'
       },
     ];
+    this.lineChartOptions.legend.labels.boxWidth=40;
     this.isShown = false;    
   }
   
@@ -252,13 +261,10 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
         backgroundColor:  [ '#FFEC00','#52D726']
       },
     ];
+    this.lineChartOptions.legend.labels.boxWidth=40;
     this.isShown = false;
     
   }
-
-  colorGenerator() {
-    return 'rgba(255, 99, 132, 0.2)';
-  } 
 
   async getChartResults() {
     if (this.lineChartData[0] && this.lineChartData[1] && this.lineChartData[2] && this.lineChartData[3]) {
@@ -366,7 +372,8 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
         this.lineChartLabels = [];
         this.lineChartData = [{ data: [],
           // label: totalCount 
-          label : "Average Count  " + parseInt(totalCount)
+          label : "Average Count  " + parseInt(totalCount),
+          
         }];
         let yAxisOk = [];
         let yAxisGood = [];

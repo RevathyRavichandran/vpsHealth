@@ -61,6 +61,7 @@ export class CustomListComponent implements OnInit, OnChanges {
   @HostListener('document:keypress', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.keyCode === 13) {
+      console.log('test key pressed', event)
         this.apply();
     }
   }
