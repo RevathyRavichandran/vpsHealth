@@ -481,7 +481,7 @@ input[type='radio']:checked:after {
 }
 
 .show-hide-div {
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 20px;
     margin-bottom: 15px;
     /* box-shadow: 0px 0px 8px -2px grey; */
@@ -562,7 +562,7 @@ body { font-family: sans-serif;}  */
 }
 
 .outer-border {
-    border-radius: 10px;
+    border-radius: 15px;
     padding-left: 20px !important;
     background-color: #fff;
 }
@@ -592,7 +592,7 @@ body { font-family: sans-serif;}  */
 }
 
 .form-control {
-    height: 36px;
+    height: 33px;
 }
 
 .form-control::placeholder {

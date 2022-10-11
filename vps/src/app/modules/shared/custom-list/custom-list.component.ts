@@ -49,7 +49,7 @@ export class CustomListComponent implements OnInit, OnChanges {
     this.tableDetails['header'] = value?.header;
     const form = value?.formDetails
     this.searchForm = new FormGroup({});
-    form.map((el) => {
+    form?.map((el) => {
       this.searchForm.addControl(el['controlName'], new FormControl(''))
     })
 
@@ -213,6 +213,55 @@ export class CustomListComponent implements OnInit, OnChanges {
       this.clear()
       return;
     }
+
+    if(formValue && formValue.status?.length > 0) {
+      formValue.status = formValue.status?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.waba_no?.length > 0) {
+      formValue.waba_no = formValue.waba_no?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.milestone?.length > 0) {
+      formValue.milestone = formValue.milestone?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.language?.length > 0) {
+      formValue.language = formValue.language?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.facilityName?.length > 0) {
+      formValue.facilityName = formValue.facilityName?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.phase?.length > 0) {
+      formValue.phase = formValue.phase?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.rating?.length > 0) {
+      formValue.rating = formValue.rating?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.regionFilter?.length > 0) {
+      formValue.regionFilter = formValue.regionFilter?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.facilityFilter?.length > 0) {
+      formValue.facilityFilter = formValue.facilityFilter?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.departmentNameFilter?.length > 0) {
+      formValue.departmentNameFilter = formValue.departmentNameFilter?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.physicianNameFilter?.length > 0) {
+      formValue.physicianNameFilter = formValue.physicianNameFilter?.map(d => `'${d}'`).join(',')
+    }
+
+    if(formValue && formValue.WABANumber?.length > 0) {
+      formValue.WABANumber = formValue.WABANumber?.map(d => `'${d}'`).join(',')
+    }
+
     this.isApplyClicked = true;
 
     this.searchDatas = {
@@ -235,6 +284,42 @@ export class CustomListComponent implements OnInit, OnChanges {
 
   pageChangeEvent(event) {
     this.page = Number(event);
+    if(this.searchDatas && this.searchDatas.status?.length > 0 ) {
+      this.searchDatas.status = this.searchDatas.status?.map(d => `'${d}'`).join(',')
+    }
+    if(this.searchDatas && this.searchDatas.waba_no?.length > 0 ) {
+      this.searchDatas.waba_no = this.searchDatas.waba_no?.map(d => `'${d}'`).join(',')
+    }
+    if(this.searchDatas && this.searchDatas.milestone?.length > 0 ) {
+      this.searchDatas.milestone = this.searchDatas.milestone?.map(d => `'${d}'`).join(',')
+    }
+    if(this.searchDatas && this.searchDatas.language?.length > 0 ) {
+      this.searchDatas.language = this.searchDatas.language?.map(d => `'${d}'`).join(',')
+    }
+    if(this.searchDatas && this.searchDatas.facilityName?.length > 0 ) {
+      this.searchDatas.facilityName = this.searchDatas.facilityName?.map(d => `'${d}'`).join(',')
+    }
+	if(this.searchDatas && this.searchDatas.phase?.length > 0 ) {
+      this.searchDatas.phase = this.searchDatas.phase?.map(d => `'${d}'`).join(',')
+    }
+	if(this.searchDatas && this.searchDatas.rating?.length > 0 ) {
+      this.searchDatas.rating = this.searchDatas.rating?.map(d => `'${d}'`).join(',')
+    }
+	if(this.searchDatas && this.searchDatas.regionFilter?.length > 0 ) {
+      this.searchDatas.regionFilter = this.searchDatas.regionFilter?.map(d => `'${d}'`).join(',')
+    }
+	if(this.searchDatas && this.searchDatas.facilityFilter?.length > 0 ) {
+      this.searchDatas.facilityFilter = this.searchDatas.facilityFilter?.map(d => `'${d}'`).join(',')
+    }
+	if(this.searchDatas && this.searchDatas.departmentNameFilter?.length > 0 ) {
+      this.searchDatas.departmentNameFilter = this.searchDatas.departmentNameFilter?.map(d => `'${d}'`).join(',')
+    }
+	if(this.searchDatas && this.searchDatas.physicianNameFilter?.length > 0 ) {
+      this.searchDatas.physicianNameFilter = this.searchDatas.physicianNameFilter?.map(d => `'${d}'`).join(',')
+    }
+	if(this.searchDatas && this.searchDatas.WABANumber?.length > 0 ) {
+      this.searchDatas.WABANumber = this.searchDatas.WABANumber?.map(d => `'${d}'`).join(',')
+    }
     const paginationDatas = {
       searchDatas: this.searchDatas,
       pageIndex: this.page

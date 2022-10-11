@@ -19,7 +19,7 @@
                                 </ng-container>
                                 <ng-container *ngIf="control?.type == 'select'">
                                     <label class="show-hide-label">{{control?.label}}</label>
-                                    <app-custom-select [values]="control.list" formControlName="{{control?.controlName}}">
+                                    <app-custom-select [values]="control.list" [controlName]="control.controlName" formControlName="{{control?.controlName}}">
                                     </app-custom-select>
                                 </ng-container>
                             </div>

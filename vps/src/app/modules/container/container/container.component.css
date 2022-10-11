@@ -3,7 +3,8 @@
 }
 
 .side-bar {
-    background-color: #f7f8ff;
+    background: linear-gradient(to bottom, #fff
+    29%, #ADAFB2 100%);
     /* border-right: 1px solid #dee2e6; */
     padding-left: 0px;
     padding-right: 0px;

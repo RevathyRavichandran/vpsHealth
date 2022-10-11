@@ -32,6 +32,16 @@ export class AppointmentComponent implements OnInit {
     title: 'Appointment',
     formDetails: [
       {
+        label: 'Mobile Number',
+        controlName: 'mobileNumber',
+        type: 'input',
+      },
+      {
+        label: 'Patient Id',
+        controlName: 'patientIdFilter',
+        type: 'input'
+      },
+      {
         label: 'Language',
         controlName: 'language',
         type: 'select',
@@ -46,11 +56,7 @@ export class AppointmentComponent implements OnInit {
           }
         ]
       },
-      {
-        label: 'Patient Id',
-        controlName: 'patientIdFilter',
-        type: 'input'
-      },
+      
       // {
       //   label: 'Appointment Id',
       //   controlName: 'appointmentId',
@@ -87,7 +93,7 @@ export class AppointmentComponent implements OnInit {
       //   type: 'input'
       // }
     ],
-    header: ['SNo', "Date & Time", 'Language', "Patient Id",  "Appointment Id", "Region", "Branch", "Department", "Physician Name", "Appointment Date", "Slot Time" ], // table headers
+    header: ['SNo', "Date & Time", 'Mobile Number', 'Language', "Patient Id",  "Appointment Id", "Region", "Branch", "Department", "Physician Name", "Appointment Date", "Slot Time" ], // table headers
   }
   customListDatas: {};
 
@@ -143,10 +149,10 @@ export class AppointmentComponent implements OnInit {
 
     if(this.regionList.length==0) {
       await this.getAppointmentPatientList();
-      this.initValues.formDetails[2].list = this.regionList;
-      this.initValues.formDetails[3].list = this.branchList;
-      this.initValues.formDetails[4].list = this.deptList;
-      this.initValues.formDetails[5].list = this.physicianList;
+      this.initValues.formDetails[3].list = this.regionList;
+      this.initValues.formDetails[4].list = this.branchList;
+      this.initValues.formDetails[5].list = this.deptList;
+      this.initValues.formDetails[6].list = this.physicianList;
     }
    
       
@@ -175,7 +181,7 @@ export class AppointmentComponent implements OnInit {
         totalRecords: this.totalRecords,
         data: this.visitorsList,
         appointment : true,
-        keys: ['SNo', "createdDateAndTime", 'language', "patientId", "appointmentReferenceNumber", "regionName", "facilityName", "departmentName", "physicianName", "appointmentDate", "slotStartTime"],  // To get the data from key
+        keys: ['SNo', "createdDateAndTime", 'reg_mobile_number', 'language', "patientId", "appointmentReferenceNumber", "regionName", "facilityName", "departmentName", "physicianName", "appointmentDate", "slotStartTime"],  // To get the data from key
       }
 
     } else {

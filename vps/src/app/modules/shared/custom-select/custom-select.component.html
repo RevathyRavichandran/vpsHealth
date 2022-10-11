@@ -12,11 +12,27 @@
   }}</option>
   
 </select> -->
-<ng-select [placeholder]="placeholder" [virtualScroll]="true"
+<ng-select [placeholder]="placeholder" [virtualScroll]="true" [multiple]="controlName == 'folderName' || 'url' || 'subFolder'"
       [(ngModel)]="selectedOption" [items]="values" bindLabel="value" bindValue="key"
-      [closeOnSelect]="true" (blur)="onBlurMethod($event)" [disabled]="isDisabled" (clear)="onClear()"
+      [closeOnSelect]="false" (blur)="onBlurMethod($event)" [disabled]="isDisabled" (clear)="onClear()"
       (scrollToEnd)="onScrollEnd()" [loading]='loading' >
-</ng-select>
+      <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.value}}
+    </ng-template>
+    <ng-template ng-header-tmp let-items="items">
+        <input type="checkbox" [checked]="isChecked" (change)="toggleCheckAll($event)"/> Select All
+        </ng-template>
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.value}}
+    </ng-template>
+    <ng-template ng-multi-label-tmp let-items="items">
+      <div class="ng-value" *ngFor="let item of items | slice:0:2">
+        {{item['value']}}
+      </div>
+      <div class="ng-value" *ngIf="items.length > 2">
+        <span class="ng-value-label">{{items.length - 2}} more...</span>
+      </div>
+    </ng-template>
      
 <div class="error-feedback" *ngIf="inputError">
   <div>

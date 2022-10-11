@@ -27,11 +27,11 @@ export class VisitorsComponent implements OnInit {
   initValues = {
     title: 'Appointment Conversion',
     formDetails: [
-      // {
-      //   label: 'Mobile Number',
-      //   controlName: 'mobileNumber',
-      //   type: 'input'
-      // },
+      {
+        label: 'Mobile Number',
+        controlName: 'mobileNumber',
+        type: 'input'
+      },
       {
         label: 'Waba Number',
         controlName: 'waba_no',
@@ -97,7 +97,7 @@ export class VisitorsComponent implements OnInit {
 
     if(this.wabaList.length==0) {
       await this.getConversionFilter();
-      this.initValues.formDetails[0].list = this.wabaList;
+      this.initValues.formDetails[1].list = this.wabaList;
     }
 
     console.log('params', params);

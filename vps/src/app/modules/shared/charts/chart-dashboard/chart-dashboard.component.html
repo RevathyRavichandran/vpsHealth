@@ -1,4 +1,4 @@
-<div class="row m-0 mb-5">
+<div class="row m-0 mb-2">
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pl-3" clickColor>
         <div class="sub-box-purple curs_pointer" [ngClass]="{'active': visitorActive}" (click)="onBookAppointMent()" [ngStyle]="{'background-color':'#fff'}">
             <!-- <label class="big-num-wht curs_pointer">{{retailerStatus?.ticketCount || '0'}}</label> -->
@@ -39,18 +39,50 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-5">
+        
+    </div>
+    <div class="form-group col-5">
+        
+
+        <input readonly type="text" class="col-lg-12 col-md-12 col-sm-12 form-control outer-border" placeholder="Select Date Range" [value]="dateRangeValue" name="daterangeInput" daterangepicker #pickerDate [options]="options" (selected)="selectedDate($event, daterange)"
+        />
+        <i *ngIf="dateRangeValue" (click)="clearDate()" class="fa fa-times icon-caret-times"></i>
+        <i (click)="pickerDate.click()" class="fa fa-calendar-alt icon-caret"></i>
+    </div>
+    <div class="col-2 text-center">
+        
+        <button class="btn btn-pri btn-pri-shadow mr-2" (click)="apply()">
+            Apply
+        </button>
+        <button class="btn btn-sec btn-sec-shadow" (click)="clearDate()">
+            Clear
+        </button>
+    </div>
+</div>
 <div class="row m-0">
     <!-- <div class="{{conversionActive || feedbackActive || ticketsActive ?'col-lg-10 col-md-10 col-sm-12':'col-lg-9 col-md-9 col-sm-12'}} "> -->
-    <div class="col-lg-10 col-md-10 col-sm-12">
+    <div class="col-lg-12 col-md-10 col-sm-12">
         <div class="chart">
+            <div class="row">
+                <div class="col-6">
+                    
+                </div>
+                <div class="col-6 text-right">
+                    <button class="btn  btn-sec btn-sec-shadow mr-2" [ngClass]="{'active': visitorActive && weekActive && !dateFilter, 'active1': feedbackActive && weekActive && !dateFilter,  'active2': ticketsActive && weekActive && !dateFilter,  'active3': conversionActive && weekActive && !dateFilter}" (click)="onWeek()">Week</button>
+                    <button class="btn  btn-sec btn-sec-shadow mr-2" [ngClass]="{'active': visitorActive && monthActive && !dateFilter, 'active1': feedbackActive && monthActive && !dateFilter,  'active2': ticketsActive && monthActive && !dateFilter,  'active3': conversionActive && monthActive && !dateFilter}" (click)="onMonth()">Month</button>
+                    <button class="btn  btn-sec btn-sec-shadow mr-2" [ngClass]="{'active': visitorActive && yearActive && !dateFilter, 'active1': feedbackActive && yearActive && !dateFilter,  'active2': ticketsActive && yearActive && !dateFilter,  'active3': conversionActive && yearActive && !dateFilter}" (click)="onYear()">Year</button>
+                </div>
+            </div>
             <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
           </canvas>
         </div>
     </div>
 
     <!-- <div class="{{conversionActive || feedbackActive || ticketsActive ?'col-lg-2 col-md-2 col-sm-12':'col-lg-3 col-md-3 col-sm-12'}} timeline"> -->
-    <div class="col-lg-2 col-md-2 col-sm-12 timeline">
-        <div class="">
+    <!-- <div class="col-lg-2 col-md-2 col-sm-12 timeline">
+        <div class=""> -->
             <!-- <div class="domain" *ngIf="isShown">
                 <h3>Domain</h3>
                 <div class=" radio">
@@ -68,15 +100,15 @@
                 </div>
             </div> -->
 
-            <div class="timline">
+            <!-- <div class="timline">
                 <h3>Timeline</h3>
                 <div class="row">
-                    <!-- <div class="{{conversionActive || feedbackActive || ticketsActive ?'col-lg-12':'col-lg-4'}} m-t-2"> -->
+                    <div class="{{conversionActive || feedbackActive || ticketsActive ?'col-lg-12':'col-lg-4'}} m-t-2">
                     <div class="col-lg-12 m-t-2">
                         <div class="content" [ngClass]="{'active': visitorActive && weekActive, 'active1': feedbackActive && weekActive,  'active2': ticketsActive && weekActive,  'active3': conversionActive && weekActive}" (click)="onWeek()">
-                            <!-- <img src="assets/image/weekly_white_76.png" alt="" srcset=""> -->
+                            <img src="assets/image/weekly_white_76.png" alt="" srcset="">
                             <img src="assets/image/{{weekActive?'weekly_white_76':'weekly_76'}}.png" alt="" srcset="">
-                            <!-- {{weekActive?'weekly_white_76':'weekly_76'}} -->
+                            {{weekActive?'weekly_white_76':'weekly_76'}}
                             <h5>Week</h5>
                         </div>
                     </div>
@@ -94,5 +126,5 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>

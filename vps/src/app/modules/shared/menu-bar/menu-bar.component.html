@@ -23,15 +23,44 @@
             <div class="accordion-menu" id="headingOne">
                 <h2 class="collapse-inner rounded mb-0">
                     <a class="collapse-item ">
-                        <button (click)="onAppointment()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '2'}" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button (click)="onMatrix()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '7'}" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            <img class="side-icon" src="assets/image/metrics.png">Metrics
+                        </button>
+                    </a>
+                </h2>
+            </div>
+            <div id="collapseSeven" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
+        </div>
+        <div class="">
+            <div class="accordion-menu" id="headingOne">
+                <h2 class="collapse-inner rounded mb-0">
+                    <a class="collapse-item ">
+                        <button (click)="open2 = open2=='true' ? 'false' : 'true'"  class="btn accordion" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <img class="side-icon" src="assets/image/Feedback icon.png">Reports <i class="fa fa-caret-down" *ngIf="open2=='false' || !open2" aria-hidden="true"></i>
+                            <i class="fa fa-caret-up" *ngIf="open2=='true'" aria-hidden="true"></i>
+                        </button>
+                        <button *ngIf="open2=='true'" (click)="onAppointment()" class="btn accordion ml-2" [ngClass]="{'active': selectedNavTab === '2'}" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <img class="side-icon" src="assets/image/Book_appointment.png">Appointment
                         </button>
+                        <button *ngIf="open2=='true'" (click)="onFeedback()" class="btn accordion ml-2" [ngClass]="{'active': selectedNavTab === '3'}" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <img class="side-icon" src="assets/image/Feedback icon.png">Feedback
+                        </button>
+                        <button *ngIf="open2=='true'" (click)="onTickets()" class="btn accordion ml-2" [ngClass]="{'active': selectedNavTab === '4'}" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <img class="side-icon" src="assets/image/Ticket icon.png">Live Agent
+                        </button>
+                        <button *ngIf="open2=='true'" class="btn accordion ml-2" (click)="onMilestone()" [ngClass]="{'active': selectedNavTab === '5'}" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <img class="side-icon" src="assets/image/milestone_icon.png">Milestone
+                        </button>
+                        <button *ngIf="open2=='true'" (click)="onVisitors()" class="btn accordion ml-2" [ngClass]="{'active': selectedNavTab === '6'}" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <img class="side-icon" src="assets/image/suitcase.png">Conversion
+                        </button>
+
                     </a>
                 </h2>
             </div>
             <div id="collapseTwo" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
         </div>
-        <div class="">
+        <!-- <div class="">
             <div class="accordion-menu" id="headingOne">
                 <h2 class="collapse-inner rounded mb-0">
                     <a class="collapse-item ">
@@ -81,19 +110,8 @@
                 </h2>
             </div>
             <div id="collapseSix" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
-        </div>
-        <div class="">
-            <div class="accordion-menu" id="headingOne">
-                <h2 class="collapse-inner rounded mb-0">
-                    <a class="collapse-item ">
-                        <button (click)="onMatrix()" class="btn accordion" [ngClass]="{'active': selectedNavTab === '7'}" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                            <img class="side-icon" src="assets/image/metrics.png">Metrics
-                        </button>
-                    </a>
-                </h2>
-            </div>
-            <div id="collapseSeven" class="" aria-labelledby="headingOne" data-parent="#accordionExample"></div>
-        </div>
+        </div> -->
+        
         <div class="">
             <div class="accordion-menu" id="headingOne">
                 <h2 class="collapse-inner rounded mb-0">

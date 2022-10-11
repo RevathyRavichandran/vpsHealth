@@ -33,6 +33,11 @@ export class FeedbackComponent implements OnInit {
     title: 'Feedback',
     formDetails: [
       {
+        label: 'Mobile Number',
+        controlName: 'mobileNumber',
+        type: 'input',
+      },
+      {
         label: 'Language',
         controlName: 'language',
         type: 'select',
@@ -94,19 +99,19 @@ export class FeedbackComponent implements OnInit {
         type: 'select',
         list:[
           {
-            key: 'Great',
+            key: '1',
             value: 'Great'
           },
           {
-            key: 'Good',
+            key: '2',
             value: 'Good'
           },
           {
-            key: 'Ok',
+            key: '3',
             value: 'Ok'
           },
           {
-            key: 'Bad',
+            key: '4',
             value: 'Bad'
           }
         ]
@@ -182,8 +187,8 @@ export class FeedbackComponent implements OnInit {
 
     if(this.wabaList.length==0) {
       await this.getFeedbackFilter();
-      this.initValues.formDetails[4].list = this.wabaList;
-      this.initValues.formDetails[1].list = this.branchList;
+      this.initValues.formDetails[5].list = this.wabaList;
+      this.initValues.formDetails[2].list = this.branchList;
     }
 
     console.log('params', params)

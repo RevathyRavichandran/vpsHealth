@@ -4,6 +4,7 @@ import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import { Color, Label } from "ng2-charts";
 import { ToasterService } from '@services/toaster.service';
 import { AnimatedDigitComponent } from '@shared/animated-digit/animated-digit.component';
+import { DateRangeService } from '@services/date-range.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
 
 
-  isShown: boolean = true ; 
+  isShown: boolean = true ;
+  dateFilter: boolean = false; 
 
   retailerStatus : {
     feedbackCount: any,
@@ -39,6 +41,13 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   weekActive: boolean;
   monthActive: boolean;
   yearActive: boolean;
+
+  public daterange: any = {};
+
+  options: any;
+  dateRangeValue: String = '';
+  searchFromDate: any = '';
+  searchToDate: any = '';
 
   visitorActive: boolean;
   ticketsActive: boolean;
@@ -64,6 +73,12 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     annotation: '',
+    elements: {
+      line: {
+        tension: 0
+      }
+    },
+
     legend: {
       labels: {
         fontColor: 'black',
@@ -99,6 +114,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private enterpriseApiService: EnterpriseApiService,
     private toasterService: ToasterService, 
+    private dateService: DateRangeService,
   ) {
     this.weekActive = true;
   }
@@ -108,6 +124,23 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.onBookAppointMent();
     this.getRetailerStatus();
+    this.options = {
+      autoUpdateInput: false,
+      locale: { format: 'YYYY-MM-DD', },
+      alwaysShowCalendars: true,
+      startDate: this.dateService.getWhichDay(6),
+      endDate: this.dateService.getWhichDay(0),
+      //minDate: this.dateService.getLastTweleveMonthDate(),
+      maxDate: new Date(),
+      ranges: {
+        'Today': [this.dateService.getWhichDay(0)],
+        'Yesterday': [this.dateService.getWhichDay(1), this.dateService.getWhichDay(1)],
+        'Last 7 Days': [this.dateService.getWhichDay(6)],
+        'Last 30 Days': [this.dateService.getWhichDay(29)],
+        // 'This Month': [moment().startOf('month'), moment().endOf('month')],
+        // 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }
+    };
   }
 
 
@@ -144,6 +177,8 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   }
 
   onWeek() {
+    this.clear();
+    this.dateFilter = false;
     this.xAxisType = "1";
     if(this.conversionActive){
       this.getConversionChartResults();
@@ -161,6 +196,8 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   }
   
   onMonth() {
+    this.clear();
+    this.dateFilter = false;
     this.xAxisType = "2";
     if(this.conversionActive){
       this.getConversionChartResults();
@@ -177,6 +214,8 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   }
 
   onYear() {
+    this.clear();
+    this.dateFilter = false;
     this.xAxisType = "3";
     if(this.conversionActive){
       this.getConversionChartResults();
@@ -192,8 +231,31 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     // this.bgColor = ['#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3'];
   }
 
+  apply() {
+    
+    if (this.searchFromDate && this.searchToDate) {
+      this.dateFilter = true;
+      if (this.conversionActive) {
+        this.onConversion();
+      } else if (this.feedbackActive) {
+        this.onFeedback();
+      } else if (this.ticketsActive) {
+        this.onLiveAgent();
+      } else {
+        this.onBookAppointMent();
+      }
+    } else {
+      this.toasterService.showError('Please fill date', 'Dashboard Chart')
+    }
+    
+
+}
+
+
   onBookAppointMent() {
+    this.dateFilter = this.searchFromDate ? true : false;
     this.nameOfCounts = "BOOK_APPOINTMENT"
+    this.lineChartOptions.elements.line.tension = 0;
     this.getChartResults();
     this.visitorActive = true;
     this.ticketsActive = false;
@@ -203,8 +265,8 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     // this.label= 'My First Dataset',
     this.lineChartColors = [
       {
-        borderColor: '#EF7D2B ',
-      backgroundColor:  '#F4C696'
+        borderColor: '#064575',
+      backgroundColor:  'rgb(6,69,117, 0.3)'
       },
     ];
     this.lineChartOptions.legend.labels.boxWidth=40;
@@ -212,6 +274,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   }
 
   onLiveAgent() {
+    this.dateFilter = this.searchFromDate ? true : false;
     this.nameOfCounts = "LIVE_AGENT"
     this.getChartResults();
     this.visitorActive = false;
@@ -231,6 +294,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   }
 
   onFeedback() {
+    this.dateFilter = this.searchFromDate ? true : false;
     this.nameOfCounts = "FEEDBACK"
     this.getFeedbackChartResults();
     this.visitorActive = false;
@@ -248,6 +312,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   }
   
   onConversion(){
+    this.dateFilter = this.searchFromDate ? true : false;
     this.nameOfCounts = "VISITOR"
     this.getConversionChartResults();
     this.visitorActive = false;
@@ -257,13 +322,52 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     this.lineChartType = "pie"; 
     this.lineChartColors = [
       {
-        borderColor: '#11af12',
-        backgroundColor:  [ '#FFEC00','#52D726']
+        borderColor: '#A7BFE8',
+        backgroundColor:  [ '#6190E8','#A7BFE8']
       },
     ];
     this.lineChartOptions.legend.labels.boxWidth=40;
     this.isShown = false;
     
+  }
+
+  public selectedDate(value: any, datepicker?: any) {
+    // this is the date  selected
+    console.log(value);
+
+    // any object can be passed to the selected event and it will be passed back here
+    datepicker.start = value.start;
+    datepicker.end = value.end;
+
+    // use passed valuable to update state
+    this.daterange.start = value.start;
+    this.daterange.end = value.end;
+    this.daterange.label = value.label;
+
+
+    const startDate = this.dateService.getTicketDateFormat(value.start['_d']);
+    const endDate = this.dateService.getTicketDateFormat(value.end['_d']);
+
+    this.searchFromDate = startDate;
+
+    this.searchToDate = endDate;
+
+    this.dateRangeValue = `${this.searchFromDate} - ${this.searchToDate}`
+  }
+
+  clearDate() {
+  
+    this.searchFromDate = '';
+    this.searchToDate = '';
+    this.dateRangeValue = '';
+    this.onWeek();
+  }
+
+  clear() {
+  
+    this.searchFromDate = '';
+    this.searchToDate = '';
+    this.dateRangeValue = '';
   }
 
   async getChartResults() {
@@ -279,7 +383,9 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     try {
       const params = {
         xAxis: this.xAxisType,
-        nameOfCounts: this.nameOfCounts
+        nameOfCounts: this.nameOfCounts,
+        "fromDate": this.searchFromDate,
+        "toDate": this.searchToDate
       }
       const response: any = await this.enterpriseApiService.getChart(params);
       console.log('getChart', response);
@@ -315,8 +421,12 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
             const graphDate = graph.graphDate;
             const split = graphDate.split('-');
             const output = `${split[2]}/${split[1]}`
-            this.lineChartLabels.push(output);
-            xAxis.push(output);
+            if(split[2]) {
+              this.lineChartLabels.push(output);
+              xAxis.push(output);
+            } else {
+              xAxis.push(graph.graphDate);
+            }
             yAxis.push(graph.graphCount);
           }
           this.bgColor =  ['#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF','#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF'];
@@ -353,7 +463,9 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     try {
       const params = {
         xAxis: this.xAxisType,
-        nameOfCounts: this.nameOfCounts
+        nameOfCounts: this.nameOfCounts,
+        "fromDate": this.searchFromDate,
+        "toDate": this.searchToDate
       }
       const response: any = await this.enterpriseApiService.getFeedbackChart(params);
       console.log('getChart', response);
@@ -396,8 +508,13 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
             const graphDate = graph.graphDate;
             const split = graphDate.split('-');
             const output = `${split[2]}/${split[1]}`
-            this.lineChartLabels.push(output);
-            xAxis.push(output);
+            if(split[2]) {
+              this.lineChartLabels.push(output);
+              xAxis.push(output);
+            } else {
+              xAxis.push(graph.graphDate);
+            }
+            
             yAxisOk.push(graph.ok);
             yAxisGood.push(graph.good);
             yAxisBad.push(graph.bad);
@@ -460,6 +577,8 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     try {
       const params = {
         xAxis: this.xAxisType,
+        "fromDate": this.searchFromDate,
+        "toDate": this.searchToDate
         // nameOfCounts: this.nameOfCounts
       }
       const response: any = await this.enterpriseApiService.getConversionChart(params);

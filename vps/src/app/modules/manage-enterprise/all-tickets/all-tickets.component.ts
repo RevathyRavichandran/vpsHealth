@@ -27,6 +27,16 @@ export class AllTicketsComponent implements OnInit {
     title: 'Live Agent',
     formDetails: [
       {
+        label: 'Mobile Number',
+        controlName: 'mobileNumber',
+        type: 'input',
+      },
+      {
+        label: 'Patient Id',
+        controlName: 'patientId',
+        type: 'input'
+      },
+      {
         label: 'Language ',
         controlName: 'language',
         type: 'select',
@@ -40,16 +50,6 @@ export class AllTicketsComponent implements OnInit {
             value: 'Arabic'
           }
         ]
-      },
-      {
-        label: 'Patient Id',
-        controlName: 'patientId',
-        type: 'input'
-      },
-      {
-        label: 'Mobile Number',
-        controlName: 'mobileNumber',
-        type: 'input',
       },
       {
         label: 'Waba Number',

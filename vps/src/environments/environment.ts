@@ -12,7 +12,8 @@ export const environment = {
 
   projectIds: {
     
-    vps: '7ad28864dcb411ec845e0022480d6e6c'
+    // vps: '7ad28864dcb411ec845e0022480d6e6c',
+    vps: '603dcdb6dbeb11ec84380022480d6e6c'
   },
 
   // host:' http://178.128.125.44/appiyo/',
