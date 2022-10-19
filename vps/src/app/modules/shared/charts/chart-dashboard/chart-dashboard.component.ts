@@ -5,6 +5,7 @@ import { Color, Label } from "ng2-charts";
 import { ToasterService } from '@services/toaster.service';
 import { AnimatedDigitComponent } from '@shared/animated-digit/animated-digit.component';
 import { DateRangeService } from '@services/date-range.service';
+import moment from 'moment';
 
 
 @Component({
@@ -82,9 +83,10 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     legend: {
       labels: {
         fontColor: 'black',
-        // boxWidth: this.wid
+        boxWidth: 0,
+        
       },
-      
+      onClick: null,
       position: 'top' // place legend on the right side of chart
    },
     
@@ -126,9 +128,11 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     this.getRetailerStatus();
     this.options = {
       autoUpdateInput: false,
-      locale: { format: 'YYYY-MM-DD', },
-      alwaysShowCalendars: true,
-      startDate: this.dateService.getWhichDay(6),
+      autoApply: true,
+      locale: { format: 'YYYY-MM-DD',
+      applyLabel: 'ok' },
+      // alwaysShowCalendars: true,
+      startDate: this.dateService.getWhichDay(0),
       endDate: this.dateService.getWhichDay(0),
       //minDate: this.dateService.getLastTweleveMonthDate(),
       maxDate: new Date(),
@@ -141,10 +145,13 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
         // 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       }
     };
+
+   
   }
 
 
   ngAfterViewInit() {
+    
     // this.animateCount();
   }
 
@@ -376,9 +383,14 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
       this.lineChartData[1].data = [];
       this.lineChartData[2].data = [];
       this.lineChartData[3].data = [];
+      this.lineChartData[0].label = '';
+      this.lineChartData[1].label = '';
+      this.lineChartData[2].label = '';
+      this.lineChartData[3].label = '';
     } else if (this.lineChartData[0]) {
       this.lineChartData[0]['data'] = [];
-    }  
+      this.lineChartData[0].label = '';
+    } 
     
     try {
       const params = {
@@ -431,9 +443,15 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
           }
           this.bgColor =  ['#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF','#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF'];
         })
+
+        if (this.xAxisType == '3' && !this.searchFromDate) {
+          this.lineChartData[0]['data'] = yAxis.reverse();
+          this.lineChartLabels= xAxis.reverse();
+        } else {
+          this.lineChartData[0]['data'] = yAxis;
+          this.lineChartLabels= xAxis;
+        }
         
-        this.lineChartData[0]['data'] = yAxis.reverse();
-        this.lineChartLabels= xAxis.reverse();
 
         console.log('this.lineChartLabels', this.lineChartLabels) //xAxis
         console.log('this.lineChartData', this.lineChartData) //yAxis
@@ -544,9 +562,12 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
           backgroundColor: 'rgba(255, 99, 132, 0.8)',
           hoverBackgroundColor: 'rgba(255, 99, 132, 0.7)'
        }];
-        
+       if (this.xAxisType == '3' && !this.searchFromDate) {
         this.lineChartLabels= xAxis.reverse();
-
+      } else {
+        this.lineChartLabels= xAxis;
+      }
+        
         console.log('this.barChartLabels', this.lineChartLabels) //xAxis
         console.log('this.barChartData', this.lineChartData) //yAxis
       }
@@ -573,7 +594,6 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     } else if (this.lineChartData[0]) {
       this.lineChartData[0]['data'] = [];
     }  
-    
     try {
       const params = {
         xAxis: this.xAxisType,

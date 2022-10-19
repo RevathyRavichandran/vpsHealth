@@ -191,7 +191,6 @@ export class FeedbackComponent implements OnInit {
       this.initValues.formDetails[2].list = this.branchList;
     }
 
-    console.log('params', params)
     const feedback: any = await this.enterpriseService.getFeedbackList(params);
 
     console.log('feedback', feedback)
@@ -224,10 +223,10 @@ export class FeedbackComponent implements OnInit {
         data: this.feedbackList,
         appointment : true,
         feedback: true,
-        greatCount: params.rating == 'Great' || !params.rating ? this.greatCount : 0,
-        goodCount : params.rating == 'Good' || !params.rating ? this.goodCount : 0,
-        okCount : params.rating == 'Ok' || !params.rating ? this.okCount : 0,
-        badCount : params.rating == 'Bad' || !params.rating ? this.badCount : 0,
+        greatCount: this.greatCount,
+        goodCount : this.goodCount,
+        okCount : this.okCount,
+        badCount : this.badCount,
         keys: ["SNo", "createdDateAndTime", "mobileNumber", "waba_no", "language", "patientId", "domain", "facilityName", "phase", "rating", "comment" ],  // To get the data from key
         //Table header length should be equal to keys
       }

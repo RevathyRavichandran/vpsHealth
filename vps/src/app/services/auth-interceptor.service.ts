@@ -40,7 +40,8 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     const reqBody = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
 
-    if (reqBody && reqBody.showLoader !== false) {
+    if (reqBody && reqBody.showLoader !== false && reqBody.processId != 'acc5316837e611ed8c760242ac110002') {
+      console.log('testing', reqBody)
       this.ngxUiLoaderService.start();
     }
 

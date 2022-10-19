@@ -24,17 +24,17 @@
 }
 
 .grid-menu>div {
-    padding: 10px;
+    margin-bottom: -2rem;
 }
 
 .grid-one {
     text-align: center;
 }
 
-.grid-one img {
+/* .grid-one img {
     width: 60px;
     height: 50px;
-}
+} */
 
 .grid-two {
     text-align: left;

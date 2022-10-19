@@ -126,8 +126,9 @@ export class CustomListComponent implements OnInit, OnChanges {
     this.options = {
       autoUpdateInput: false,
       locale: { format: 'YYYY-MM-DD', },
-      alwaysShowCalendars: true,
-      startDate: this.dateService.getWhichDay(6),
+      autoApply: true,
+      // alwaysShowCalendars: true,
+      startDate: this.dateService.getWhichDay(0),
       endDate: this.dateService.getWhichDay(0),
       //minDate: this.dateService.getLastTweleveMonthDate(),
       maxDate: new Date(),
@@ -214,51 +215,51 @@ export class CustomListComponent implements OnInit, OnChanges {
       return;
     }
 
-    if(formValue && formValue.status?.length > 0) {
+    if(formValue && Array.isArray(formValue.status)) {
       formValue.status = formValue.status?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.waba_no?.length > 0) {
+    if(formValue && Array.isArray(formValue.waba_no)) {
       formValue.waba_no = formValue.waba_no?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.milestone?.length > 0) {
+    if(formValue && Array.isArray(formValue.milestone)) {
       formValue.milestone = formValue.milestone?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.language?.length > 0) {
+    if(formValue && Array.isArray(formValue.language)) {
       formValue.language = formValue.language?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.facilityName?.length > 0) {
+    if(formValue && Array.isArray(formValue.facilityName)) {
       formValue.facilityName = formValue.facilityName?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.phase?.length > 0) {
+    if(formValue && Array.isArray(formValue.phase)) {
       formValue.phase = formValue.phase?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.rating?.length > 0) {
+    if(formValue && Array.isArray(formValue.rating)) {
       formValue.rating = formValue.rating?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.regionFilter?.length > 0) {
+    if(formValue && Array.isArray(formValue.regionFilter)) {
       formValue.regionFilter = formValue.regionFilter?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.facilityFilter?.length > 0) {
+    if(formValue && Array.isArray(formValue.facilityFilter)) {
       formValue.facilityFilter = formValue.facilityFilter?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.departmentNameFilter?.length > 0) {
+    if(formValue && Array.isArray(formValue.departmentNameFilter)) {
       formValue.departmentNameFilter = formValue.departmentNameFilter?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.physicianNameFilter?.length > 0) {
+    if(formValue && Array.isArray(formValue.physicianNameFilter)) {
       formValue.physicianNameFilter = formValue.physicianNameFilter?.map(d => `'${d}'`).join(',')
     }
 
-    if(formValue && formValue.WABANumber?.length > 0) {
+    if(formValue && Array.isArray(formValue.WABANumber)) {
       formValue.WABANumber = formValue.WABANumber?.map(d => `'${d}'`).join(',')
     }
 
@@ -284,40 +285,40 @@ export class CustomListComponent implements OnInit, OnChanges {
 
   pageChangeEvent(event) {
     this.page = Number(event);
-    if(this.searchDatas && this.searchDatas.status?.length > 0 ) {
+    if(this.searchDatas && Array.isArray(this.searchDatas.status) ) {
       this.searchDatas.status = this.searchDatas.status?.map(d => `'${d}'`).join(',')
     }
-    if(this.searchDatas && this.searchDatas.waba_no?.length > 0 ) {
+    if(this.searchDatas && Array.isArray(this.searchDatas.waba_no) ) {
       this.searchDatas.waba_no = this.searchDatas.waba_no?.map(d => `'${d}'`).join(',')
     }
-    if(this.searchDatas && this.searchDatas.milestone?.length > 0 ) {
+    if(this.searchDatas && Array.isArray(this.searchDatas.milestone) ) {
       this.searchDatas.milestone = this.searchDatas.milestone?.map(d => `'${d}'`).join(',')
     }
-    if(this.searchDatas && this.searchDatas.language?.length > 0 ) {
+    if(this.searchDatas && Array.isArray(this.searchDatas.language) ) {
       this.searchDatas.language = this.searchDatas.language?.map(d => `'${d}'`).join(',')
     }
-    if(this.searchDatas && this.searchDatas.facilityName?.length > 0 ) {
+    if(this.searchDatas && Array.isArray(this.searchDatas.facilityName) ) {
       this.searchDatas.facilityName = this.searchDatas.facilityName?.map(d => `'${d}'`).join(',')
     }
-	if(this.searchDatas && this.searchDatas.phase?.length > 0 ) {
+	if(this.searchDatas && Array.isArray(this.searchDatas.phase) ) {
       this.searchDatas.phase = this.searchDatas.phase?.map(d => `'${d}'`).join(',')
     }
-	if(this.searchDatas && this.searchDatas.rating?.length > 0 ) {
+	if(this.searchDatas && Array.isArray(this.searchDatas.rating) ) {
       this.searchDatas.rating = this.searchDatas.rating?.map(d => `'${d}'`).join(',')
     }
-	if(this.searchDatas && this.searchDatas.regionFilter?.length > 0 ) {
+	if(this.searchDatas && Array.isArray(this.searchDatas.regionFilter) ) {
       this.searchDatas.regionFilter = this.searchDatas.regionFilter?.map(d => `'${d}'`).join(',')
     }
-	if(this.searchDatas && this.searchDatas.facilityFilter?.length > 0 ) {
+	if(this.searchDatas && Array.isArray(this.searchDatas.facilityFilter) ) {
       this.searchDatas.facilityFilter = this.searchDatas.facilityFilter?.map(d => `'${d}'`).join(',')
     }
-	if(this.searchDatas && this.searchDatas.departmentNameFilter?.length > 0 ) {
+	if(this.searchDatas && Array.isArray(this.searchDatas.departmentNameFilter) ) {
       this.searchDatas.departmentNameFilter = this.searchDatas.departmentNameFilter?.map(d => `'${d}'`).join(',')
     }
-	if(this.searchDatas && this.searchDatas.physicianNameFilter?.length > 0 ) {
+	if(this.searchDatas && Array.isArray(this.searchDatas.physicianNameFilter) ) {
       this.searchDatas.physicianNameFilter = this.searchDatas.physicianNameFilter?.map(d => `'${d}'`).join(',')
     }
-	if(this.searchDatas && this.searchDatas.WABANumber?.length > 0 ) {
+	if(this.searchDatas && Array.isArray(this.searchDatas.WABANumber) ) {
       this.searchDatas.WABANumber = this.searchDatas.WABANumber?.map(d => `'${d}'`).join(',')
     }
     const paginationDatas = {

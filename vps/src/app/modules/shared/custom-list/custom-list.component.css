@@ -614,3 +614,7 @@ body { font-family: sans-serif;}  */
 .sno-width {
     width: 60px;
 }
+::ng-deep.daterangepicker .ranges li:last-child {
+    background-color: #064575 !important;
+    color: white;
+ }
