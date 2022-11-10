@@ -147,13 +147,7 @@ export class AppointmentComponent implements OnInit {
       ...searchData
     }
 
-    if(this.regionList.length==0) {
-      await this.getAppointmentPatientList();
-      this.initValues.formDetails[3].list = this.regionList;
-      this.initValues.formDetails[4].list = this.branchList;
-      this.initValues.formDetails[5].list = this.deptList;
-      this.initValues.formDetails[6].list = this.physicianList;
-    }
+    
    
       
     console.log('params', params);
@@ -186,6 +180,13 @@ export class AppointmentComponent implements OnInit {
 
     } else {
       this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'Appointment list error' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
+    if(this.regionList.length==0) {
+      await this.getAppointmentPatientList();
+      this.initValues.formDetails[3].list = this.regionList;
+      this.initValues.formDetails[4].list = this.branchList;
+      this.initValues.formDetails[5].list = this.deptList;
+      this.initValues.formDetails[6].list = this.physicianList;
     }
   }
 

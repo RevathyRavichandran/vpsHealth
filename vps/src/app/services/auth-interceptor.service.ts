@@ -40,7 +40,13 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     const reqBody = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
 
-    if (reqBody && reqBody.showLoader !== false && reqBody.processId != 'acc5316837e611ed8c760242ac110002') {
+    if(reqBody?.processId == 'acc5316837e611ed8c760242ac110002' || reqBody?.processId == '89a69bac380611edbcdf0242ac110002'
+      || reqBody?.processId == "68e874f23a3711edaa0a0242ac110002" || reqBody?.processId == "6019c08e3a3b11edbe9e0242ac110002"
+      || reqBody?.processId == "76e71fae3a3c11ed8c760242ac110002") {
+      this.ngxUiLoaderService.stop();
+    }
+
+    else if (reqBody && reqBody.showLoader !== false) {
       console.log('testing', reqBody)
       this.ngxUiLoaderService.start();
     }

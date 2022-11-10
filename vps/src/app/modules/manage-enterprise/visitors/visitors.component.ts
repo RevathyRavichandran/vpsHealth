@@ -95,11 +95,6 @@ export class VisitorsComponent implements OnInit {
       ...searchData
     }
 
-    if(this.wabaList.length==0) {
-      await this.getConversionFilter();
-      this.initValues.formDetails[1].list = this.wabaList;
-    }
-
     console.log('params', params);
     if (!params.fromDate && !params.toDate && !params.waba_no) {
       params.fromDate = moment().format("YYYY-MM-DD"),
@@ -142,6 +137,10 @@ export class VisitorsComponent implements OnInit {
 
     } else {
       this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'Appointment conversion list' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
+    if(this.wabaList.length==0) {
+      await this.getConversionFilter();
+      this.initValues.formDetails[1].list = this.wabaList;
     }
   }
 

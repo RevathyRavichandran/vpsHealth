@@ -263,11 +263,12 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     this.dateFilter = this.searchFromDate ? true : false;
     this.nameOfCounts = "BOOK_APPOINTMENT"
     this.lineChartOptions.elements.line.tension = 0;
-    this.getChartResults();
     this.visitorActive = true;
     this.ticketsActive = false;
     this.feedbackActive = false;
     this.conversionActive = false;
+    this.getChartResults();
+    
     this.lineChartType = "line"; 
     // this.label= 'My First Dataset',
     this.lineChartColors = [
@@ -377,292 +378,25 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     this.dateRangeValue = '';
   }
 
-  async getChartResults() {
-    if (this.lineChartData[0] && this.lineChartData[1] && this.lineChartData[2] && this.lineChartData[3]) {
-      this.lineChartData[0].data = [];
-      this.lineChartData[1].data = [];
-      this.lineChartData[2].data = [];
-      this.lineChartData[3].data = [];
-      this.lineChartData[0].label = '';
-      this.lineChartData[1].label = '';
-      this.lineChartData[2].label = '';
-      this.lineChartData[3].label = '';
-    } else if (this.lineChartData[0]) {
-      this.lineChartData[0]['data'] = [];
-      this.lineChartData[0].label = '';
-    } 
-    
-    try {
-      const params = {
-        xAxis: this.xAxisType,
-        nameOfCounts: this.nameOfCounts,
-        "fromDate": this.searchFromDate,
-        "toDate": this.searchToDate
-      }
-      const response: any = await this.enterpriseApiService.getChart(params);
-      console.log('getChart', response);
-
-      const appiyoError = response?.Error;
-      const apiErrorCode = response.ProcessVariables?.errorCode;
-      const errorMessage = response.ProcessVariables?.errorMessage;
-
-      this.processVariables = response?.ProcessVariables
-     
-      if (appiyoError == '0') {
-  
-        const graphCounts = this.processVariables.graphDateList;
-        const year = this.processVariables.xAxis;
-        const totalCount = this.processVariables.totalAverage;
-        this.lineChartLabels = [];
-        this.lineChartData = [{ data: [],
-          // label: totalCount 
-          label : "Average Count: " + parseInt(totalCount)
-        }];
-        let yAxis = []
-        let xAxis = [];
-        graphCounts.forEach((graph) => {
-
-          if (year == "3"){
-            // const graphDate = graph.graphDate;
-            // const split = graphDate.split('-');
-            // const output = `${split[2]}/${split[1]}`
-            // this.lineChartLabels.push(output);
-             xAxis.push(graph.graphDate);
-            yAxis.push(graph.graphCount);
-          }else{
-            const graphDate = graph.graphDate;
-            const split = graphDate.split('-');
-            const output = `${split[2]}/${split[1]}`
-            if(split[2]) {
-              this.lineChartLabels.push(output);
-              xAxis.push(output);
-            } else {
-              xAxis.push(graph.graphDate);
-            }
-            yAxis.push(graph.graphCount);
-          }
-          this.bgColor =  ['#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF','#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF'];
-        })
-
-        if (this.xAxisType == '3' && !this.searchFromDate) {
-          this.lineChartData[0]['data'] = yAxis.reverse();
-          this.lineChartLabels= xAxis.reverse();
-        } else {
-          this.lineChartData[0]['data'] = yAxis;
-          this.lineChartLabels= xAxis;
-        }
-        
-
-        console.log('this.lineChartLabels', this.lineChartLabels) //xAxis
-        console.log('this.lineChartData', this.lineChartData) //yAxis
-      }
-      else {
-        if (errorMessage === undefined) {
-          return;
-        }
-        this.toasterService.showError(errorMessage == undefined ? 'Chart error' : errorMessage, 'Dashboard Chart')
-      }
-    } catch (err) {
-      console.log("Error", err);
+getChartResults() {
+    if(this.ticketsActive  || this.visitorActive) {
+      console.log('checking')
+      this.toasterService.updateMessage(this.xAxisType);
+      // this.toasterService.sendClickEvent();
     }
 
   }
 
   async getFeedbackChartResults() {
-    if (this.lineChartData[0] && this.lineChartData[1] && this.lineChartData[2] && this.lineChartData[3]) {
-      this.lineChartData[0].data = [];
-      this.lineChartData[1].data = [];
-      this.lineChartData[2].data = [];
-      this.lineChartData[3].data = [];
-    } else if (this.lineChartData[0]) {
-      this.lineChartData[0]['data'] = [];
-    }    
-    
-    try {
-      const params = {
-        xAxis: this.xAxisType,
-        nameOfCounts: this.nameOfCounts,
-        "fromDate": this.searchFromDate,
-        "toDate": this.searchToDate
-      }
-      const response: any = await this.enterpriseApiService.getFeedbackChart(params);
-      console.log('getChart', response);
-
-      const appiyoError = response?.Error;
-      const apiErrorCode = response.ProcessVariables?.errorCode;
-      const errorMessage = response.ProcessVariables?.errorMessage;
-
-      this.processVariables = response?.ProcessVariables
-     
-      if (appiyoError == '0' && apiErrorCode == "200") {
-  
-        const graphCounts = this.processVariables.graphDateList;
-        const year = this.processVariables.xAxis;
-        const totalCount = this.processVariables.totalAverage;
-        this.lineChartLabels = [];
-        this.lineChartData = [{ data: [],
-          // label: totalCount 
-          label : "Average Count  " + parseInt(totalCount),
-          
-        }];
-        let yAxisOk = [];
-        let yAxisGood = [];
-        let yAxisBad = [];
-        let yAxisGreat = [];
-        let xAxis = [];
-        graphCounts.forEach((graph) => {
-
-          if (year == "3"){
-            // const graphDate = graph.graphDate;
-            // const split = graphDate.split('-');
-            // const output = `${split[2]}/${split[1]}`
-            // this.lineChartLabels.push(output);
-             xAxis.push(graph.graphDate);
-             yAxisOk.push(graph.ok);
-             yAxisGood.push(graph.good);
-            yAxisBad.push(graph.bad);
-            yAxisGreat.push(graph.great);
-          }else{
-            const graphDate = graph.graphDate;
-            const split = graphDate.split('-');
-            const output = `${split[2]}/${split[1]}`
-            if(split[2]) {
-              this.lineChartLabels.push(output);
-              xAxis.push(output);
-            } else {
-              xAxis.push(graph.graphDate);
-            }
-            
-            yAxisOk.push(graph.ok);
-            yAxisGood.push(graph.good);
-            yAxisBad.push(graph.bad);
-            yAxisGreat.push(graph.great);
-          }
-          // this.bgColor =  ['#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF','#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF'];
-        })
-
-        this.lineChartData = [{
-          label: 'Great',
-          data: yAxisGreat.reverse(),
-          backgroundColor: 'rgba(54, 162, 235, 0.9)',
-          hoverBackgroundColor: 'rgba(54, 162, 235, 0.7)'
-         }, {
-          label: 'Good',
-          data: yAxisGood.reverse(),
-          backgroundColor: 'rgba(255, 205, 86, 0.8)',
-          hoverBackgroundColor: 'rgba(255, 205, 86, 0.7)'
-       }, {
-            label: 'Ok',
-            data: yAxisOk.reverse(),
-            backgroundColor: 'rgba(75, 192, 192, 0.8)',
-            hoverBackgroundColor: 'rgba(75, 192, 192, 0.7)'
-        }, {
-          label: 'Bad',
-          data: yAxisBad.reverse(),
-          backgroundColor: 'rgba(255, 99, 132, 0.8)',
-          hoverBackgroundColor: 'rgba(255, 99, 132, 0.7)'
-       }];
-       if (this.xAxisType == '3' && !this.searchFromDate) {
-        this.lineChartLabels= xAxis.reverse();
-      } else {
-        this.lineChartLabels= xAxis;
-      }
-        
-        console.log('this.barChartLabels', this.lineChartLabels) //xAxis
-        console.log('this.barChartData', this.lineChartData) //yAxis
-      }
-      else {
-        if (errorMessage === undefined) {
-          return;
-        }
-        this.toasterService.showError(errorMessage == undefined ? 'Chart error' : errorMessage, 'Dashboard Chart')
-      }
-    } catch (err) {
-      console.log("Error", err);
+    if(this.feedbackActive) {
+      this.toasterService.updateMessage(this.xAxisType);
     }
-
   }
 
 
   async getConversionChartResults() {
-    if (this.lineChartData[0] && this.lineChartData[1] && this.lineChartData[2] && this.lineChartData[3]) {
-      this.lineChartData[0].data = [];
-      this.lineChartData[1].data = [];
-      this.lineChartData[2].data = [];
-      this.lineChartData[3].data = [];
-      this.lineChartData.splice(1, this.lineChartData.length-1);
-    } else if (this.lineChartData[0]) {
-      this.lineChartData[0]['data'] = [];
-    }  
-    try {
-      const params = {
-        xAxis: this.xAxisType,
-        "fromDate": this.searchFromDate,
-        "toDate": this.searchToDate
-        // nameOfCounts: this.nameOfCounts
-      }
-      const response: any = await this.enterpriseApiService.getConversionChart(params);
-      console.log('getChart', response);
-
-      const Error = response?.Error;
-      const ErrorCode = response?.ErrorCode;
-      const ErrorMessage = response?.ErrorMessage;
-
-      this.processVariables = response?.ProcessVariables
-     
-      if (Error == '0' ) {
-  
-        const appointmentCount = this.processVariables.appointmentBookingCount;
-        const visitorCount = this.processVariables.visitorCount;
-        const year = this.processVariables.xAxis;
-        const graphCounts = [{
-         "graphCount" : visitorCount,
-          "graphDate" : visitorCount
-        },
-      {
-        "graphCount" : appointmentCount,
-         "graphDate" : appointmentCount,
-      }]
-        // this.lineChartLabels = [];
-        // this.lineChartData = [{ data: [],
-        //   label: 'Count' }];
-        let yAxis = []
-        let xAxis = [];
-        graphCounts.forEach((graph) => {
-
-          if (year == "3"){
-            // const graphDate = graph.graphDate;
-            // const split = graphDate.split('-');
-            // const output = `${split[2]}/${split[1]}`
-            // this.lineChartLabels.push(output);
-             xAxis.push(graph.graphDate);
-            yAxis.push(graph.graphCount);
-          }else{
-            const output = graph.graphDate;
-            // const split = graphDate.split('-');
-            // const output = `${split[2]}/${split[1]}`
-            this.lineChartLabels.push(output);
-            xAxis.push(output);
-            yAxis.push(graph.graphCount);
-          }
-          // this.bgColor =  ['#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF','#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF', '#FFE5A8', '#CAADFF', '#FFD1A3', '#9CFCFC', '#D7D7DF', '#FFE0E6', '#A3D9FF'];
-        })
-        
-        this.lineChartData[0]['data'] = yAxis.reverse();
-        // this.lineChartData[0]['data'] = [appointmentCount, visitorCount]
-        this.lineChartLabels= ["Appointment Count", "Visitors Count"]
-
-        console.log('this.lineChartLabels', this.lineChartLabels) //xAxis
-        console.log('this.lineChartData', this.lineChartData) //yAxis
-      }
-      else {
-        if (ErrorMessage === undefined) {
-          return;
-        }
-        this.toasterService.showError(ErrorMessage == undefined ? 'Chart error' : ErrorMessage, 'Dashboard Chart')
-      }
-    } catch (err) {
-      console.log("Error", err);
+    if(this.conversionActive) {
+      this.toasterService.updateMessage(this.xAxisType);
     }
 
   }

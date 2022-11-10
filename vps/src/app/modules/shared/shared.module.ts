@@ -17,8 +17,13 @@ import { CustomListComponent } from './custom-list/custom-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import { AnimatedDigitComponent } from './animated-digit/animated-digit.component';
+import { RadialChartComponent } from './radial-chart/radial-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { AreaChartComponent } from './area-chart/area-chart.component';
+import { ColumnChartComponent } from './column-chart/column-chart.component';
+import { StackedChartComponent } from './stacked-chart/stacked-chart.component';
 
-
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 @NgModule({
@@ -32,7 +37,12 @@ import { AnimatedDigitComponent } from './animated-digit/animated-digit.componen
     PageNotFoundComponent,
     ConfirmModalComponent,
     CustomListComponent,
-    AnimatedDigitComponent
+    AnimatedDigitComponent,
+    RadialChartComponent,
+    PieChartComponent,
+    AreaChartComponent,
+    ColumnChartComponent,
+    StackedChartComponent
     ],
   imports: [
     CommonModule,
@@ -43,6 +53,7 @@ import { AnimatedDigitComponent } from './animated-digit/animated-digit.componen
     NgSelectModule,
     NgxPaginationModule,
     Daterangepicker,
+    NgApexchartsModule
   ],
   exports: [
     MenuBarComponent,

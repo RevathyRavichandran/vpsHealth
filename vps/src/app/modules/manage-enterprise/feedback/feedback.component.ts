@@ -185,11 +185,7 @@ export class FeedbackComponent implements OnInit {
       ...data
     }
 
-    if(this.wabaList.length==0) {
-      await this.getFeedbackFilter();
-      this.initValues.formDetails[5].list = this.wabaList;
-      this.initValues.formDetails[2].list = this.branchList;
-    }
+    
 
     const feedback: any = await this.enterpriseService.getFeedbackList(params);
 
@@ -236,6 +232,11 @@ export class FeedbackComponent implements OnInit {
 
     } else {
       this.toasterService.showError(feedback['ProcessVariables']?.errorMessage == undefined ? 'Feedback list' : feedback['ProcessVariables']?.errorMessage, 'Feedback')
+    }
+    if(this.wabaList.length==0) {
+      await this.getFeedbackFilter();
+      this.initValues.formDetails[5].list = this.wabaList;
+      this.initValues.formDetails[2].list = this.branchList;
     }
   }
 

@@ -5,6 +5,7 @@ import { DaterangepickerComponent } from 'ng2-daterangepicker';
 import { DateRangeService } from '@services/date-range.service';
 import { MatInput } from '@angular/material/input';
 var moment = require('moment');
+import { UtilityService } from '@services/utility.service';
 
 @Component({
   selector: 'app-region',
@@ -44,6 +45,8 @@ export class RegionComponent implements OnInit {
   toDate: any = '';
   maxDate = new Date();
 
+  attachments: any;
+
   @ViewChild('fromInput', {
     read: MatInput,
   })
@@ -61,7 +64,8 @@ export class RegionComponent implements OnInit {
   constructor(
     private enterpriseService: EnterpriseApiService,
     private dateService: DateRangeService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private utilityService: UtilityService
   ) {}
 
   ngOnInit(): void {
@@ -235,7 +239,76 @@ export class RegionComponent implements OnInit {
     };
     this.getRegionData(params);
   }
+
+  async onDownloadCsv(event, name) {
+    var params;
+    if(event == 'region') {
+      params = {
+        fromDate: this.fromInput.value ? moment(this.fromInput.value).format("YYYY-MM-DD") : '',
+        toDate: this.toInput.value ? moment(this.toInput.value).format("YYYY-MM-DD") : '',
+        regionFilter: "'"+name+"'"
+      }
+    } else if (event == 'facility') {
+      params = {
+        fromDate: this.fromInput.value ? moment(this.fromInput.value).format("YYYY-MM-DD") : '',
+        toDate: this.toInput.value ? moment(this.toInput.value).format("YYYY-MM-DD") : '',
+        regionFilter: "'"+this.regionId+"'",
+        facilityFilter: "'"+name+"'"
+      }
+    } else if (event == 'department') {
+      params = {
+        fromDate: this.fromInput.value ? moment(this.fromInput.value).format("YYYY-MM-DD") : '',
+        toDate: this.toInput.value ? moment(this.toInput.value).format("YYYY-MM-DD") : '',
+        regionFilter: "'"+this.regionId+"'",
+        facilityFilter: "'"+this.facilityId+"'",
+        departmentNameFilter: "'"+name+"'"
+      }
+    } else if (event == 'physician') {
+      params = {
+        fromDate: this.fromInput.value ? moment(this.fromInput.value).format("YYYY-MM-DD") : '',
+        toDate: this.toInput.value ? moment(this.toInput.value).format("YYYY-MM-DD") : '',
+        regionFilter: "'"+this.regionId+"'",
+        facilityFilter: "'"+this.facilityId+"'",
+        departmentNameFilter: "'"+this.physicianId+"'",
+        physicianNameFilter: "'"+name+"'"
+      }
+    }
+    // var params = {
+    //   fromDate: this.fromInput.value ? moment(this.fromInput.value).format("YYYY-MM-DD") : '',
+    //   toDate: this.toInput.value ? moment(this.toInput.value).format("YYYY-MM-DD") : '',
+    //   regionFilter: this.regionId,
+    //   facilityFilter: this.facilityId,
+    //   departmentNameFilter: this.physicianId
+    // };
+    
+
+    console.log('params', params);
+
+    const visitors: any = await this.enterpriseService.appointmentCsvDownload(params);
+
+    console.log('Visitors', visitors)
+
+    const appiyoError = visitors?.Error;
+    const apiErrorCode = visitors.ProcessVariables?.errorCode;
+    const errorMessage = visitors.ProcessVariables?.errorMessage;
+
+    if (appiyoError == '0' && apiErrorCode == "200") {
+
+      const processVariables = visitors['ProcessVariables']
+
+      this.attachments = processVariables?.attachment;
+      this.utilityService.onDownloadCsv(this.attachments);
+
+
+    } else {
+      this.toasterService.showError(visitors['ProcessVariables']?.errorMessage == undefined ? 'Download error' : visitors['ProcessVariables']?.errorMessage, 'Visitors')
+    }
+  }
+
+
 }
+
+
 
 // export interface counrty {
 //   no: number;

@@ -58,7 +58,9 @@
                                     <ng-container matColumnDef="No">
                                     </ng-container>
                                     <ng-container matColumnDef="Country">
-                                        <td mat-cell *matCellDef="let element" (click)="getFacility(element.metricName)" [ngClass]="{'selectedItem': regionId == element.metricName, 'none': element.metricName == '' }"> {{element.metricName}} <span>{{element.metricCount}}</span> </td>
+                                        <td mat-cell *matCellDef="let element"  [ngClass]="{'selectedItem': regionId == element.metricName, 'none': element.metricName == '' }"> 
+                                            <span class="text-click" (click)="getFacility(element.metricName)">{{element.metricName}}</span>  
+                                            <span class="float"><i class="fa fa-download" (click)="onDownloadCsv('region', element.metricName)" style="cursor: pointer;" aria-hidden="true"></i> &nbsp; &nbsp;{{element.metricCount}}</span> </td>
                                     </ng-container>
                                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                                 </table>
@@ -87,7 +89,9 @@
 
                                     </ng-container> -->
                                     <ng-container matColumnDef="hospital">
-                                        <td mat-cell *matCellDef="let element" (click)="getHospital(element.metricName)" [ngClass]="{'selectedItem': facilityId == element.metricName, 'none': element.metricName == '' }"> {{element.metricName}} <span>{{element.metricCount}}</span></td>
+                                        <td mat-cell *matCellDef="let element" [ngClass]="{'selectedItem': facilityId == element.metricName, 'none': element.metricName == '' }"> 
+                                           <span class="text-click" (click)="getHospital(element.metricName)" >{{element.metricName}}</span> <span class="float"> 
+                                            <i class="fa fa-download" (click)="onDownloadCsv('facility', element.metricName)" style="cursor: pointer;" aria-hidden="true"></i> &nbsp; &nbsp;{{element.metricCount}}</span></td>
                                     </ng-container>
                                     <tr mat-row *matRowDef="let row; columns: facilityColumns;"></tr>
                                 </table>
@@ -112,7 +116,9 @@
                             <div class="table-height ">
                                 <table mat-table [dataSource]="departmentSource" class=" departmentTable">
                                     <ng-container matColumnDef="department">
-                                        <td mat-cell *matCellDef="let element" (click)="getPhysician(element.metricName)" [ngClass]="{'selectedItem': physicianId == element.metricName, 'none': element.metricName == '' }"> {{element.metricName}} <span>{{element.metricCount}}</span></td>
+                                        <td mat-cell *matCellDef="let element"  [ngClass]="{'selectedItem': physicianId == element.metricName, 'none': element.metricName == '' }"> 
+                                            <span class="text-click" (click)="getPhysician(element.metricName)" >{{element.metricName}}</span> <span class="float"> 
+                                                <i class="fa fa-download" (click)="onDownloadCsv('department', element.metricName)" style="cursor: pointer;" aria-hidden="true"></i> &nbsp; &nbsp;{{element.metricCount}}</span></td>
                                     </ng-container>
                                     <tr mat-row *matRowDef="let row; columns: departmentColumns;"></tr>
                                 </table>
@@ -138,7 +144,11 @@
                             <div class="table-height">
                                 <table mat-table [dataSource]="physicianSource" class=" physicianTable">
                                     <ng-container matColumnDef="physician" >
-                                        <td mat-cell *matCellDef="let element" [ngClass]="{'none': element.metricName == '' }"> {{element.metricName}} <span>{{element.metricCount}}</span></td>
+                                        <td mat-cell *matCellDef="let element" [ngClass]="{'none': element.metricName == '' }"> 
+                                            <span class="text-click" >{{element.metricName}}</span> <span class="float"> 
+                                                <i class="fa fa-download" (click)="onDownloadCsv('physician', element.metricName)"
+                                                 style="cursor: pointer;" aria-hidden="true"></i> &nbsp; &nbsp;{{element.metricCount}}</span>
+                                            </td>
                                     </ng-container>
                                     <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
                                     <tr mat-row *matRowDef="let row; columns: physicianColumns;"></tr>

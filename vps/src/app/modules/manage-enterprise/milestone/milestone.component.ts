@@ -125,11 +125,6 @@ export class MilestoneComponent implements OnInit {
       ...searchData
     }
 
-    if(this.wabaList.length==0) {
-      await this.getMilestoneFilterList();
-      this.initValues.formDetails[2].list = this.wabaList;
-      this.initValues.formDetails[3].list = this.mileStoneList;
-    }
 
     console.log('params', params);
 
@@ -165,6 +160,12 @@ export class MilestoneComponent implements OnInit {
     } else {
      
       this.toasterService.showError(milestone['ProcessVariables']?.errorMessage == undefined ? 'Milestone list error' : milestone['ProcessVariables']?.errorMessage, 'Milestone')
+    }
+
+    if(this.wabaList.length==0) {
+      await this.getMilestoneFilterList();
+      this.initValues.formDetails[2].list = this.wabaList;
+      this.initValues.formDetails[3].list = this.mileStoneList;
     }
   }
 

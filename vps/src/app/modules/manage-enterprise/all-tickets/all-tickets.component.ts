@@ -111,10 +111,7 @@ export class AllTicketsComponent implements OnInit {
       ...searchData
     }
 
-    if(this.wabaList.length==0) {
-      await this.getFeedbackFilter();
-      this.initValues.formDetails[3].list = this.wabaList;
-    }
+    
 
     console.log('params', params)
 
@@ -149,6 +146,10 @@ export class AllTicketsComponent implements OnInit {
   } else {
       
       this.toasterService.showError(ticketsData['ProcessVariables']?.errorMessage == undefined ? 'Live agent list' : ticketsData['ProcessVariables']?.errorMessage, 'Tickets')
+    }
+    if(this.wabaList.length==0) {
+      await this.getFeedbackFilter();
+      this.initValues.formDetails[3].list = this.wabaList;
     }
   }
 

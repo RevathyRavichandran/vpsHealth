@@ -40,7 +40,7 @@ table th {
   /* color: white; */
 }
 
-span {
+.float {
   float: right;
   font-weight: bold;
 }
@@ -270,4 +270,11 @@ mat-datepicker-toggle {
 .filter {
   text-align: end;
   padding-right: 2rem;
+}
+.text-click {
+  cursor: pointer;  
+  /* position: absolute; */
+}
+.text-click:hover {
+  text-decoration: underline; 
 }
